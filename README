@@ -1,0 +1,11 @@
+RESTGears aims to be:
+- a simple to use and yet powerful document-based restful backend
+- optimized for scalable environemtn like ep.io and google app engine
+- compatible with RESTKit (http://restkit.org/)
+
+RESTGears consists of:
+- the document model (http://couchdb.apache.org/docs/intro.html)
+- tagging and hierarchical categories
+- file handling
+
+A basic RESTGears insallation is similar to a very limited CouchDB (http://couchdb.apache.org/docs/intro.html) except that it runs on Google App Engine :-)
