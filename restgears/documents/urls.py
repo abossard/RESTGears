@@ -7,5 +7,5 @@ document_info = {
 }
 
 urlpatterns = patterns ('',
-    (r'^$', list_detail.object_list, document_info),
+    (r'^$', list_detail.object_list, document_info, 'documents-index'),
 )
