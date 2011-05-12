@@ -119,11 +119,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'restgears.documents',
     'restgears.accounts',
     'restgears.files',
-    'restgears.stats'
-
+    'restgears.stats',
+    'restgears.news',
 )
 
 # A sample logging configuration. The only tangible logging

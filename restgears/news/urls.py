@@ -1,11 +1,11 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from documents.models import Document
+from news.models import Document
 
-document_info = {
+news_info = {
         "queryset" : Document.objects.all(),
 }
 
 urlpatterns = patterns ('',
-    (r'^$', list_detail.object_list, document_info, 'documents-index'),
+    (r'^$', list_detail.object_list, news_info, 'news-index'),
 )

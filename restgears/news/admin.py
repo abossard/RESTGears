@@ -1,5 +1,5 @@
 from django.contrib import admin
-from restgears.documents.models import Document, Category, Tag
+from restgears.news.models import Document, Category, Tag
 
 class DocumentAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}

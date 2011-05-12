@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'restgears.views.home', name='home'),
-    url(r'^documents/', include('restgears.documents.urls'), name='documents'),
+    url(r'^news/', include('restgears.news.urls'), name='news'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    (r'^$', direct_to_template, {'template': 'documents/index.html'}),
+    (r'^$', direct_to_template, {'template': 'news/index.html'}),
 )
