@@ -1,10 +1,10 @@
 from django.contrib import admin
-from restgears.news.models import Document, Category, Tag
+from restgears.news.models import NewsEntry, Category, Tag
 
-class DocumentAdmin(admin.ModelAdmin):
+class NewsEntryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
-admin.site.register(Document, DocumentAdmin)
+admin.site.register(NewsEntry, NewsEntryAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
     pass

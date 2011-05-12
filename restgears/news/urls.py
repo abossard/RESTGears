@@ -1,9 +1,9 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from news.models import Document
+from news.models import NewsEntry
 
 news_info = {
-        "queryset" : Document.objects.all(),
+        "queryset" : NewsEntry.objects.all(),
 }
 
 urlpatterns = patterns ('',

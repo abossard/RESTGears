@@ -1,8 +1,7 @@
 from django.db import models
 from datetime import datetime
 
-
-class Document(models.Model):
+class BaseModel(models.Model):
     name = models.CharField(max_length=200, help_text='Choose a name that describes this document')
     type = models.CharField(max_length=100, blank=True, help_text='Use type to better distinguish between documents')
     slug = models.SlugField(max_length=50, db_index=True)
@@ -33,6 +32,11 @@ class Document(models.Model):
     #@models.permalink
     #def get_absolute_url(self):
     #    return ('documents.views.show', [str(self.id)])
+    class Meta:
+        abstract = True
+
+class NewsEntry(BaseModel):
+    pass
 
 class Category(models.Model):
     name = models.CharField(max_length=200, help_text='Choose a name that describes this category', db_index=True, unique=True)
@@ -46,7 +50,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=32, db_index=True)
-    document = models.ForeignKey('Document', related_name='tags')
+    document = models.ForeignKey('NewsEntry', related_name='tags')
 
     def __unicode__(self):
         return self.name
