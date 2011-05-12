@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from datetime import datetime
 
 class BaseModel(models.Model):
@@ -31,6 +32,8 @@ class BaseModel(models.Model):
     #    return ('documents.views.show', [str(self.id)])
     class Meta:
         abstract = True
+        ordering = ['-created_on']
+
 
 class Entry(BaseModel):
     teaser = models.TextField(max_length=500, help_text='Insert text only');
@@ -40,6 +43,9 @@ class Image(models.Model):
     description = models.TextField(max_length=500, help_text='Insert text only');
     newsentry = models.ForeignKey(Entry);
     image = models.FileField(upload_to='uploads/news');
+    def _url(self):
+        return settings.MEDIA_URL + str(self.image);
+    url = property(_url)    
 
 class Category(models.Model):
     name = models.CharField(max_length=200, help_text='Choose a name that describes this category', db_index=True, unique=True)

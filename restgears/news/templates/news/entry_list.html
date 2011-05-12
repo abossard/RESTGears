@@ -6,7 +6,7 @@
       <h1>{{ entry.name }}
       </h1>
       {% for image in entry.image_set.all  %}
-      <img src="{{MEDIA_URL}}{{ image.image }}"/><br/>
+      <img src="{{ image.url }}"/><br/>
       <em>{{image.description}}</em>
       {% endfor %}
       <p><strong>{{ entry.teaser }}</strong>
