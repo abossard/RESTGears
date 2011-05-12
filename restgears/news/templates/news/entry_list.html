@@ -1,7 +1,19 @@
-<h2>News Entries</h2>
+<h2>News Entries
+</h2>
     <ul>
     {% for entry in object_list %}
-    <li>{{ entry }}</li>
+    <li>
+      <h1>{{ entry.name }}
+      </h1>
+      {% for image in entry.image_set.all  %}
+      <img src="{{MEDIA_URL}}{{ image.image }}"/><br/>
+      <em>{{image.description}}</em>
+      {% endfor %}
+      <p><strong>{{ entry.teaser }}</strong>
+      </p>
+      <p>{{ entry.content|safe }}
+      </p>
+    </li>
     {% endfor %}
     </ul>
 
