@@ -4,4 +4,4 @@ from news.models import Entry
 class EntryHandler(AnonymousBaseHandler):
    allowed_methods = ('GET',)
    model = Entry
-   fields = ('name', 'teaser', 'content', ('images',('url','description',),),'id','slug', 'publish_on', )
+   fields = ('name', 'teaser', 'content', ('images',('url','description',),),'slug', 'publish_on', )
