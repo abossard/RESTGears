@@ -5,13 +5,27 @@
     <li>
       <h1>{{ entry.name }}
       </h1>
-      {% for image in entry.image_set.all  %}
+      {% for image in entry.images.all  %}
       <img src="{{ image.url }}"/><br/>
       <em>{{image.description}}</em>
       {% endfor %}
       <p><strong>{{ entry.teaser }}</strong>
       </p>
       <p>{{ entry.content|safe }}
+      </p>
+      <p>
+	<dl>
+	  <dt>Published on</dt>
+	  <dd>{{ entry.publish_on }}</dd>
+	  <dt>Created on</dt>
+	  <dd>{{ entry.created_on }}</dd>
+	  <dt>Updated on</dt>
+	  <dd>{{ entry.updated_on }}</dd>
+	  <dt>Category</dt>
+	  <dd>{{ entry.category }}</dd>
+	  <dt>Tags</dt>
+	  <dd>{{ entry.taglist.tags.all }}</dd>
+	</dl>
       </p>
     </li>
     {% endfor %}
