@@ -1,0 +1,1 @@
+curl -u andre:tester http://127.0.0.1:8000/gallery/api -X POST -F image=@image01.jpg -F category=1 -F slug=1 -F name=1 -F taglist=1
