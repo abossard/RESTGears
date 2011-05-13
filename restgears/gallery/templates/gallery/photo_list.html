@@ -1,0 +1,28 @@
+<h2>Photos
+</h2>
+    <ul>
+    {% for photo in object_list %}
+    <li>
+      <h1>{{ photo.name }}
+      </h1>
+     <img src="{{ photo.url }}"/><br/>
+     <p>{{ photo.content|safe }}
+      </p>
+      <p>
+	<dl>
+	  <dt>Published on</dt>
+	  <dd>{{ photo.publish_on }}</dd>
+	  <dt>Created on</dt>
+	  <dd>{{ photo.created_on }}</dd>
+	  <dt>Updated on</dt>
+	  <dd>{{ photo.updated_on }}</dd>
+	  <dt>Category</dt>
+	  <dd>{{ photo.category }}</dd>
+	  <dt>Tags</dt>
+	  <dd>{{ photo.taglist.tags.all }}</dd>
+	</dl>
+      </p>
+    </li>
+    {% endfor %}
+    </ul>
+

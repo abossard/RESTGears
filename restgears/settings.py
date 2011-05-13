@@ -125,9 +125,9 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'restgears.base',
     'restgears.accounts',
-    'restgears.files',
     'restgears.stats',
     'restgears.news',
+    'restgears.gallery',
 )
 
 # A sample logging configuration. The only tangible logging
