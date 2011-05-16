@@ -1,15 +1,21 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
+
 
 class BaseModel(models.Model):
     name = models.CharField(max_length=200, help_text='Choose a name that describes this object')
-    slug = models.SlugField(max_length=50, db_index=True)
-    publish_on = models.DateTimeField(blank=True, null=True, default=datetime.now)
+    slug = models.SlugField(max_length=50, db_index=True, help_text='Define a string, that is url conform')
+    publish_on = models.DateTimeField(blank=True, null=True, default=datetime.now, help_text='Set the date when this item has to be published')
     deleted_on = models.DateTimeField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey('Category')
+    category = models.ForeignKey('Category', help_text='Choose a matching category')
     taglist = models.ForeignKey('Taglist')
+    site = models.ForeignKey(Site)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     def _is_published(self):
         return self.publish_on < datetime.now()

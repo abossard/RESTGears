@@ -19,6 +19,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-
+                       
     (r'^$', direct_to_template, {'template': 'news/index.html'}),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

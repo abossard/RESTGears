@@ -6,7 +6,7 @@ from gallery.forms import PhotoForm
 class PhotoHandler(BaseHandler):
    anonymous = 'AnonymousPhotoHandler'
 
-   allowed_methods = ('GET','POST',)
+   allowed_methods = ('GET','POST','DEL')
    fields = ('name',
              'url',
              'slug',
@@ -29,7 +29,6 @@ class PhotoHandler(BaseHandler):
          return new_photo
       else:
          return form.errors
-      
 
 class AnonymousPhotoHandler(PhotoHandler, AnonymousBaseHandler):
     """

@@ -36,7 +36,8 @@ TIME_ZONE = 'Europe/Zurich'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1
+from base.sites import SiteIDHook
+SITE_ID = SiteIDHook()
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -97,6 +98,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'restgears.base.middleware.SiteSettings',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
