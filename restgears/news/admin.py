@@ -1,7 +1,17 @@
 from django.contrib import admin
 from restgears.news.models import Entry, Image
 
+class ImageInline(admin.StackedInline):
+    fields = ('image', 'description',)
+    model = Image
+
 class EntryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'publish_on')
+    list_display_links = ('name',)
+    #list_editable = ('publish_on', )
+    list_filter = ('publish_on',)
+    search_fields = ['name',]
+
     fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -17,6 +27,10 @@ class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish_on'
     exclude = ('deleted_on', )
     readonly_fields = ('created_on', 'updated_on',)
+    inlines = [
+        ImageInline,
+    ]
+
 
 admin.site.register(Entry, EntryAdmin)
 
