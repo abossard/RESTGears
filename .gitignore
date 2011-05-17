@@ -1,4 +1,14 @@
 *.pyc
 *.db
+.DS_Store
 local_settings.py
 media
+django
+djangoappengine
+djangotoolbox
+autoload
+dbindexer
+testapp
+piston
+filetransfers
+.gaedata

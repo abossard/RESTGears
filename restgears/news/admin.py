@@ -1,5 +1,6 @@
 from django.contrib import admin
-from restgears.news.models import Entry, Image
+from news.models import Entry, Image
+from filetransfers.admin import FiletransferAdmin
 
 class ImageInline(admin.StackedInline):
     fields = ('image', 'description',)
@@ -24,7 +25,7 @@ class EntryAdmin(admin.ModelAdmin):
     )
     #fields = ('name', 'slug', 'teaser', 'content', 'publish_on', 'category', 'taglist', 'created_on', 'updated_on',)
     prepopulated_fields = {"slug": ("name",)}
-    date_hierarchy = 'publish_on'
+    #date_hierarchy = 'publish_on'
     exclude = ('deleted_on', )
     readonly_fields = ('created_on', 'updated_on',)
     inlines = [
@@ -34,7 +35,7 @@ class EntryAdmin(admin.ModelAdmin):
 
 admin.site.register(Entry, EntryAdmin)
 
-class ImageAdmin(admin.ModelAdmin):
+class ImageAdmin(FiletransferAdmin):
     pass
 admin.site.register(Image, ImageAdmin)
 

@@ -1,3 +1,6 @@
+{% load filetransfers %}
+
+
 <h2>News Entries
 </h2>
     <ul>
@@ -7,6 +10,9 @@
       </h1>
       {% for image in entry.images.all  %}
       <img src="{{ image.url }}"/><br/>
+      {% url news.views.download_handler pk=image.pk as url %}
+      <a href="{{ url }}">{{ url }}</a>
+      
       <em>{{image.description}}</em>
       {% endfor %}
       <p><strong>{{ entry.teaser }}</strong>

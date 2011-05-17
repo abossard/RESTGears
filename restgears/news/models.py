@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from restgears.base.models import BaseModel
+from base.models import BaseModel
 
 class Entry(BaseModel):
     teaser = models.TextField(max_length=500, help_text='Insert text only');
@@ -11,8 +11,8 @@ class Entry(BaseModel):
 class Image(models.Model):
     description = models.TextField(max_length=500, help_text='Insert text only', blank=True);
     newsentry = models.ForeignKey(Entry, related_name='images');
-    image = models.ImageField(upload_to='uploads/news');
+    image = models.FileField(upload_to='uploads/news');
     def _url(self):
-        return settings.MEDIA_URL + str(self.image);
+        return self.image #settings.MEDIA_URL + str(self.image);
     url = property(_url)    
 

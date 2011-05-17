@@ -11,8 +11,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'restgears.views.home', name='home'),
-    url(r'^news/', include('restgears.news.urls'), name='news'),
-    url(r'^gallery/', include('restgears.gallery.urls'), name='gallery'),
+    url(r'^news/', include('news.urls'), name='news'),
+    url(r'^gallery/', include('gallery.urls'), name='gallery'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

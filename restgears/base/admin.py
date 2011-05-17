@@ -1,5 +1,5 @@
 from django.contrib import admin
-from restgears.base.models import Category, Taglist, Tag
+from base.models import Category, Taglist, Tag
 
 
 class CategoryAdmin(admin.ModelAdmin):

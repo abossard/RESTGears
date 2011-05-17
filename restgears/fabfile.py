@@ -33,6 +33,10 @@ def make_gae_ready():
     local('mv lib/python2.6/site-packages/piston .')
     local('rm -rf lib')
 
+    curl('https://bitbucket.org/aaronmadison/django-filetransfers/get/tip.zip')
+    local('mv aaronmadison-django-filetransfers-*/filetransfers .')
+    local('rm -rf aaronmadison-django-filetransfers-*')
+    
 def curl(url=None):
     filename = ''.join(url.split('/')[-1:])
     local('curl -L -O %s' % (url, ))
@@ -47,3 +51,4 @@ def clean_gae():
     local('rm -rf dbindexer')
     local('rm -rf testapp')
     local('rm -rf piston')
+    local('rm -rf filetransfers')

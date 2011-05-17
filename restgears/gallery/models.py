@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from restgears.base.models import BaseModel
+from base.models import BaseModel
 
 class Photo(BaseModel):
     image = models.FileField(upload_to='uploads/gallery');
