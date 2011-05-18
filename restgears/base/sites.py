@@ -19,10 +19,10 @@ class SiteIDHook(object):
         return str(self.__int__())
 
     def __int__(self):
-        return get_current_site_id()
+        return getattr(_thread_locals, 'SITE_ID', 1)
 
     def __hash__(self):
         return self.__int__()
 
     def set(self, value):
-        set_current_site_id(value)
+        setattr(_thread_locals, 'SITE_ID', site)
