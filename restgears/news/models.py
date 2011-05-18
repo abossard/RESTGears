@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
-from base.models import BaseModel
+from base.utils import reverse
 
+from base.models import BaseModel
+from news.views import download_handler
 class Entry(BaseModel):
     teaser = models.TextField(max_length=500, help_text='Insert text only');
     content = models.TextField(max_length=4000, help_text='Insert HTML here');
@@ -13,6 +15,6 @@ class Image(models.Model):
     newsentry = models.ForeignKey(Entry, related_name='images');
     image = models.FileField(upload_to='uploads/news');
     def _url(self):
-        return self.image #settings.MEDIA_URL + str(self.image);
-    url = property(_url)    
+        return reverse(download_handler, kwargs={'pk':self.pk,}) #self.image #settings.MEDIA_URL + str(self.image);
+    url = property(_url)
 
