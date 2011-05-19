@@ -1,6 +1,10 @@
 from django.contrib import admin
 from news.models import Entry, Image
 from filetransfers.admin import FiletransferAdmin
+from django.forms import FileInput, ClearableFileInput
+from django.db import models
+from django.utils.safestring import mark_safe
+import pprint
 
 class ImageInline(admin.StackedInline):
     fields = ('image', 'description',)
@@ -35,9 +39,30 @@ class EntryAdmin(admin.ModelAdmin):
 
 admin.site.register(Entry, EntryAdmin)
 
+class BlobFileInput(FileInput):
+    def render(self, name, value, attrs=None):
+        #for attr in dir(value):
+        #    print "obj.%s = %s" % (attr, getattr(value, attr))
+        return super(FileInput, self).render(name, None, attrs=attrs) + mark_safe(u'<a href="%s">%s</a>'%('a',value.file,))
+    
+    def value_from_datadict(self, data, files, name):
+        "File widgets take data from FILES, not POST"
+        print 'value from datadic'
+        return files.get(name, None)
+
+    def _has_changed(self, initial, data):
+        print 'has changed'
+        if data is None:
+            return False
+        return True
+
 class ImageAdmin(FiletransferAdmin):
-    pass
+    formfield_overrides = {
+        models.ImageField: {'widget': BlobFileInput},
+    }
+
 admin.site.register(Image, ImageAdmin)
+
 
 
 

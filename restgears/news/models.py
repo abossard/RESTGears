@@ -13,7 +13,7 @@ class Entry(BaseModel):
 class Image(models.Model):
     description = models.TextField(max_length=500, help_text='Insert text only', blank=True);
     newsentry = models.ForeignKey(Entry, related_name='images');
-    image = models.FileField(upload_to='uploads/news');
+    image = models.ImageField(upload_to='uploads/news');
     def _url(self):
         return reverse(download_handler, kwargs={'pk':self.pk,}) #self.image #settings.MEDIA_URL + str(self.image);
     url = property(_url)

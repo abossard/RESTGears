@@ -36,6 +36,10 @@ def make_gae_ready():
     curl('https://bitbucket.org/aaronmadison/django-filetransfers/get/tip.zip')
     local('mv aaronmadison-django-filetransfers-*/filetransfers .')
     local('rm -rf aaronmadison-django-filetransfers-*')
+
+    curl('https://bitbucket.org/uysrc/upload-sample/get/tip.zip')
+    local('mv uysrc-upload-sample-*/PIL .')
+    local('rm -rf uysrc-upload-sample-*-*')
     
 def curl(url=None):
     filename = ''.join(url.split('/')[-1:])
@@ -52,3 +56,4 @@ def clean_gae():
     local('rm -rf testapp')
     local('rm -rf piston')
     local('rm -rf filetransfers')
+    local('rm -rf PIL')
