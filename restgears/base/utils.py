@@ -10,6 +10,9 @@ class lazy_string(object):
         if not hasattr(self, 'str'):
             self.str=self.function(*self.args, **self.kwargs)
         return self.str
+    
+    def startswith(self, s):
+        return str(self).startswith(s)
 
 def reverse(*args, **kwargs):
     return lazy_string(urlresolvers.reverse, *args, **kwargs)

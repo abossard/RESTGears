@@ -29,8 +29,12 @@ def make_gae_ready():
     curl('http://bitbucket.org/wkornewald/django-testapp/get/tip.zip')
     local('mv wkornewald-django-testapp-* testapp')
 
-    local('pip install --install-option="--prefix=$PWD" django-piston')
-    local('mv lib/python2.6/site-packages/piston .')
+    #local('pip install --install-option="--prefix=$PWD" django-piston')
+    #local('mv lib/python2.6/site-packages/piston .')
+    #local('rm -rf lib')
+
+    local('pip install --install-option="--prefix=$PWD" djangorestframework')
+    local('mv lib/python2.6/site-packages/djangorestframework .')
     local('rm -rf lib')
 
     curl('https://bitbucket.org/aaronmadison/django-filetransfers/get/tip.zip')

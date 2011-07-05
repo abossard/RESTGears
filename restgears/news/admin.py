@@ -4,11 +4,8 @@ from filetransfers.admin import FiletransferAdmin
 from django.forms import FileInput, ClearableFileInput
 from django.db import models
 from django.utils.safestring import mark_safe
-import pprint
+from base.fields import AdminImageWidget
 
-class ImageInline(admin.StackedInline):
-    fields = ('image', 'description',)
-    model = Image
 
 class EntryAdmin(admin.ModelAdmin):
     list_display = ('name', 'publish_on')
@@ -20,7 +17,15 @@ class EntryAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'teaser', 'content', 'publish_on', )
+            'fields': ('name',
+                       'teaser',
+                       'content',
+                       'publish_on',
+                       )
+        }),
+        ('Images', {
+            'classes': (),
+            'fields': ('imagelist',)
         }),
         ('Advanced', {
             'classes': ('collapse',),
@@ -32,37 +37,16 @@ class EntryAdmin(admin.ModelAdmin):
     #date_hierarchy = 'publish_on'
     exclude = ('deleted_on', )
     readonly_fields = ('created_on', 'updated_on',)
-    inlines = [
-        ImageInline,
-    ]
-
 
 admin.site.register(Entry, EntryAdmin)
 
-class BlobFileInput(FileInput):
-    def render(self, name, value, attrs=None):
-        #for attr in dir(value):
-        #    print "obj.%s = %s" % (attr, getattr(value, attr))
-        return super(FileInput, self).render(name, None, attrs=attrs) + mark_safe(u'<a href="%s">%s</a>'%('a',value.file,))
-    
-    def value_from_datadict(self, data, files, name):
-        "File widgets take data from FILES, not POST"
-        print 'value from datadic'
-        return files.get(name, None)
-
-    def _has_changed(self, initial, data):
-        print 'has changed'
-        if data is None:
-            return False
-        return True
-
 class ImageAdmin(FiletransferAdmin):
+    fields = ('newsentry','image', 'description',)
+    list_display= ('preview_image','newsentry', 'description',)
+    list_filter = ('newsentry',)
     formfield_overrides = {
-        models.ImageField: {'widget': BlobFileInput},
-    }
+        models.ImageField: {'widget': AdminImageWidget},
+    }    
+    
 
 admin.site.register(Image, ImageAdmin)
-
-
-
-

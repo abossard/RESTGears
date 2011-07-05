@@ -21,12 +21,37 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: base_baseimage
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: base_image
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: base_imagelist
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: base_taglist
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: news_entry
   properties:
   - name: __key__
     direction: desc
 
 - kind: news_image
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: news_newsimage
   properties:
   - name: __key__
     direction: desc

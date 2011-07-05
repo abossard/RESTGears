@@ -3,12 +3,12 @@ try:
 except ImportError:
     from django.utils._threading_local import local
 
-DEFAULT_SITE_ID = 1
+DEFAULT_SITE_ID = 4
 
 _thread_locals = local()
 
 def get_current_site():
-    return getattr(_thread_locals, 'SITE_ID', 1)
+    return getattr(_thread_locals, 'SITE_ID', 4)
 
 def set_current_site_id(site):
     setattr(_thread_locals, 'SITE_ID', site)
@@ -19,7 +19,7 @@ class SiteIDHook(object):
         return str(self.__int__())
 
     def __int__(self):
-        return getattr(_thread_locals, 'SITE_ID', 1)
+        return getattr(_thread_locals, 'SITE_ID', 4)
 
     def __hash__(self):
         return self.__int__()

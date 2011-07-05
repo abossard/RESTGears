@@ -47,6 +47,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 
+    'djangorestframework',
+
     'base',
     'accounts',
     'stats',
@@ -58,8 +60,10 @@ INSTALLED_APPS = (
     'dbindexer',
     'filetransfers',
 
+
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
+
 )
 
 PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
