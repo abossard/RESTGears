@@ -26,6 +26,11 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: base_category
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: base_image
   properties:
   - name: __key__
@@ -39,6 +44,34 @@ indexes:
 - kind: base_taglist
   properties:
   - name: __key__
+    direction: desc
+
+- kind: gallery_gallery
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: category_id
+  - name: created_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: __key__
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: created_on
     direction: desc
 
 - kind: news_entry

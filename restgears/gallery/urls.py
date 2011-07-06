@@ -1,20 +1,36 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from gallery.models import Photo
-from gallery.handlers import PhotoHandler
-from piston.resource import Resource
-from piston.authentication import HttpBasicAuthentication
-from piston.doc import documentation_view
+from gallery.views import GalleryOverviewView,  GalleryListView, PhotoVoteView,PhotoView, download_handler, PhotoDeleteView, PhotoUploadView
+from gallery.models import Gallery, Photo
+from djangorestframework.mixins import ListModelMixin
+from djangorestframework.resources import ModelResource
+from djangorestframework.views import View, ListModelView, InstanceModelView
 
+class GalleryIndexResource(ModelResource):
+    model = Gallery
+    fields = ('name', 'url' )
+    def url(self, instance):
+        return instance.url
 
-photo_info = {
-        "queryset" : Photo.objects.all(),
-}
+class GalleryListResource(ModelResource):
+    model = Gallery
+    fields = ('name', 'created_on', ('photos',('uploaded_on',('user',('username',)), 'image_url', 'votes','url')),)
 
-auth = HttpBasicAuthentication(realm='Gallery Realms')
-photo_handler = Resource(handler=PhotoHandler, authentication=auth)
+class PhotoResource(ModelResource):
+    model = Photo
+    base_fields = ('uploaded_on',('user',('username',)), 'image_url', 'votes',)
+    vote_field = ('vote_url',)
+    delete_field = ('delete_url',)
+    def url(self, instance):
+        return instance.url
 
 urlpatterns = patterns ('',
-    (r'^$', list_detail.object_list, photo_info, 'photo-index'),
-    url(r'^api$', photo_handler, { 'emitter_format': 'json' }),
+    url(r'^$', GalleryOverviewView.as_view(), name ='gallery-overview'),
+    url(r'^index$', ListModelView.as_view(resource=GalleryIndexResource), name='gallery-index'),
+    url(r'^(?P<pk>\w+)$', GalleryListView.as_view(resource=GalleryListResource), name='gallery-instance'),
+    url(r'^upload-(?P<pk>\w+)$', PhotoUploadView.as_view(resource=PhotoResource), name='photo-upload'),
+    url(r'^photo-(?P<pk>\w+)$', PhotoView.as_view(resource=PhotoResource), name='photo-instance'),
+    url(r'^vote-(?P<pk>\w+)$', PhotoVoteView.as_view(resource=PhotoResource), name='photo-vote'),
+    url(r'^delete-(?P<pk>\w+)$', PhotoDeleteView.as_view(resource=PhotoResource), name='photo-delete'),
+    url(r'^image/(?P<pk>\w+)$', download_handler, name='gallery-image'),
 )

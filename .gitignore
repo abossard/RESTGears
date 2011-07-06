@@ -13,4 +13,5 @@ piston
 filetransfers
 PIL
 djangorestframework
+debug_toolbar
 .gaedata

@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from base.utils import reverse
 
-from base.models import BaseModel, Image as BaseImage
+from base.models import BaseModel
 from news.views import download_handler
 
 class Entry(BaseModel):
@@ -18,7 +18,6 @@ class Image(models.Model):
     image = models.ImageField(upload_to='uploads/news');
 
     def get_absolute_url(self):
-        from base.views import image_download_handler
         return reverse(download_handler, kwargs={'pk':self.pk,}) 
     url = property(get_absolute_url)
 
