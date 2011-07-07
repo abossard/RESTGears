@@ -5,10 +5,14 @@ from base.utils import reverse
 from django.contrib.auth.models import User
 
 class Gallery(BaseModel):
+
     def get_absolute_url(self):
         return reverse('gallery-instance', kwargs={'pk':self.pk,})
-    
     url = property(get_absolute_url)
+
+    def get_upload_url(self):
+        return reverse('photo-upload', kwargs={'pk':self.pk,})
+    upload_url = property(get_upload_url)
 
     class Meta:
         verbose_name_plural = 'Galleries';

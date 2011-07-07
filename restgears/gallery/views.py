@@ -1,14 +1,19 @@
 # Create your views here.
+import logging
+
 from djangorestframework.views import View, ModelView
-from djangorestframework.mixins import InstanceMixin, ReadModelMixin, DeleteModelMixin, UpdateModelMixin, CreateModelMixin
+from djangorestframework.mixins import InstanceMixin, ReadModelMixin, DeleteModelMixin, UpdateModelMixin, CreateModelMixin, AuthMixin
 from djangorestframework.resources import ModelResource
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
-from filetransfers.api import serve_file
+from filetransfers.api import serve_file, prepare_upload
 from djangorestframework import status
 from djangorestframework.response import Response, ErrorResponse
 from gallery.models import Photo, Vote
+import urllib
+from google.appengine.api import urlfetch
+
 
 class GalleryOverviewView(View):
     """Welcome to the Gallery Module.
@@ -20,13 +25,13 @@ class GalleryOverviewView(View):
     def get(self, request):
         return [{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
 
-class GalleryListView(InstanceMixin, ReadModelMixin, ModelView, View):
+class GalleryListView(InstanceMixin, ReadModelMixin, ModelView):
     _suffix = 'Instance'
     def get(self, request, *args, **kwargs):
         instance = super(GalleryListView, self).get(request, *args, **kwargs)
         return instance
 
-class PhotoView(ReadModelMixin, ModelView, View):
+class PhotoView(ReadModelMixin, ModelView):
     _suffix = 'Instance'
     def get(self, request, *args, **kwargs):
         photo = super(PhotoView, self).get(request, *args, **kwargs)
@@ -37,7 +42,7 @@ class PhotoView(ReadModelMixin, ModelView, View):
             self.resource.fields = self.resource.fields + self.resource.delete_field
         return photo
 
-class PhotoVoteView(ReadModelMixin, ModelView, View):
+class PhotoVoteView(ReadModelMixin, ModelView):
     def get(self, request, *args, **kwargs):
         photo = super(PhotoVoteView, self).get(request, *args, **kwargs)
         if photo.can_vote(self.user):
@@ -47,8 +52,32 @@ class PhotoVoteView(ReadModelMixin, ModelView, View):
             photo.save()
         return HttpResponseRedirect(photo.url)
         
-class PhotoUploadView(UpdateModelMixin, ModelView, View):
-    pass
+class PhotoUploadView(CreateModelMixin, ModelView):
+    def get(self, request, *args, **kwargs):
+        target_url = reverse('photo-upload-user', kwargs={'pk':kwargs['pk'],'user_id':self.user.id})
+        upload_url, upload_data = prepare_upload(request, target_url)
+        return {'upload_url':upload_url, 'curl_example':'curl %s -X POST -F image=@image01.jpg'%(upload_url,)}
+        
+    def post(self, request, *args, **kwargs):
+        # translated 'related_field' kwargs into 'related_field_id'
+        kwargs.update({'user_id':kwargs['user_id'],
+                       'gallery_id':kwargs['pk'],
+                       })
+        del kwargs['pk']
+        all_kw_args = dict(self.CONTENT.items() + kwargs.items())
+        logger = logging.getLogger(__name__)
+        logger.error("Returning from BlobStore, kwargs: %s, "%(all_kw_args))
+        super(PhotoUploadView, self).post(request, *args, **kwargs)
+        return HttpResponseRedirect("http://google.com")
+        #if 'pk' in kwargs:
+         #   kwargs.update({'gallery_id':kwargs['pk'],
+          #                 'user_id':1,})
+           # super(PhotoUploadView, self).post(request, *args, **kwargs)
+            #return HttpResponseRedirect("http://google.com")
+            
+        # redirect to the proper post
+
+
 
 class PhotoDeleteView(DeleteModelMixin, ModelView, View):
     def delete(self, request, *args, **kwargs):

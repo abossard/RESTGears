@@ -84,6 +84,12 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: news_image
+  properties:
+  - name: newsentry_id
+  - name: __key__
+    direction: desc
+
 - kind: news_newsimage
   properties:
   - name: __key__
