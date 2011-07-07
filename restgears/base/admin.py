@@ -21,7 +21,7 @@ class BaseModelAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('site', 'slug',( 'created_on', 'updated_on',),)
+            'fields': ('slug',( 'created_on', 'updated_on',),)
         }),
     )
     #fields = ('name', 'slug', 'teaser', 'content', 'publish_on', 'category', 'taglist', 'created_on', 'updated_on',)

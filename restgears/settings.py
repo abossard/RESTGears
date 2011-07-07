@@ -24,8 +24,8 @@ TIME_ZONE = 'Europe/Zurich'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-from base.sites import SiteIDHook
-SITE_ID = SiteIDHook()
+#from base.sites import SiteIDHook
+#SITE_ID = SiteIDHook()
 
 USE_I18N = True
 
@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
-    'django.contrib.sites',
+#    'django.contrib.sites',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

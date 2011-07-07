@@ -9,13 +9,13 @@ from django.forms import ModelForm
 
 class GalleryIndexResource(ModelResource):
     model = Gallery
-    fields = ('name', 'url' )
+    fields = ('id','name', 'url' )
     def url(self, instance):
         return instance.url
 
 class GalleryListResource(ModelResource):
     model = Gallery
-    fields = ('name', 'created_on', 'upload_url',  ('photos',('uploaded_on',('user',('username',)), 'image_url', 'votes','url')),)
+    fields = ('id','name', 'created_on', 'upload_url',  ('photos',('id','uploaded_on',('user',('username',)), 'image_url', 'votes','url')),)
 
 
 class PhotoUploadForm(ModelForm):
@@ -27,7 +27,7 @@ class PhotoResource(ModelResource):
     model = Photo
     form = PhotoUploadForm
     include = ()
-    base_fields = ('uploaded_on',('user',('username',)), 'image_url', 'votes',)
+    base_fields = ('id','uploaded_on',('user',('username',)), 'image_url', 'votes',)
     vote_field = ('vote_url',)
     delete_field = ('delete_url',)
     def url(self, instance):

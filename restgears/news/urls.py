@@ -12,11 +12,12 @@ from djangorestframework.views import ListModelView, InstanceModelView
 class EntryResource(ModelResource):
     model = Entry
     fields = (
+        'id',
         'name',
         'teaser',
         'content',
         ('images',
-         ('description', 'url',),),
+         ('description', 'url','id',),),
         'publish_on',
         #'url',
         )

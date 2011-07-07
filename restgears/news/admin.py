@@ -18,7 +18,7 @@ class EntryAdmin(BaseModelAdmin):
             }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('site', 'slug',( 'created_on', 'updated_on',),)
+            'fields': ('slug',( 'created_on', 'updated_on',),)
             }),
         ('Content', {
             'classes': ('wide',),

@@ -1,8 +1,6 @@
 from django.db import models
 from datetime import datetime
 
-from django.contrib.sites.models import Site
-from django.contrib.sites.managers import CurrentSiteManager
 from django.utils.safestring import mark_safe
 
 from base.utils import reverse
@@ -18,9 +16,9 @@ class BaseModel(models.Model):
     #category = models.ForeignKey('Category', help_text='Choose a matching category', related_name='item')
     #taglist = models.ForeignKey('Taglist')
     #imagelist = models.ForeignKey('Imagelist', null=True)
-    site = models.ForeignKey(Site)
+    #site = models.ForeignKey(Site)
     objects = models.Manager()
-    on_site = CurrentSiteManager()
+    #on_site = CurrentSiteManager()
 
     def _is_published(self):
         return self.publish_on < datetime.now()
