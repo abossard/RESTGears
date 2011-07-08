@@ -1,6 +1,6 @@
 # Create your views here.
 import logging
-
+from djangorestframework.permissions import IsAuthenticated
 from djangorestframework.views import View, ModelView
 from djangorestframework.mixins import InstanceMixin, ReadModelMixin, DeleteModelMixin, UpdateModelMixin, CreateModelMixin, AuthMixin
 from djangorestframework.resources import ModelResource
@@ -20,19 +20,22 @@ class GalleryOverviewView(View):
 
     1. index (all galleries)
 
-    Please feel free to browse, create, edit and delete the resources in these examples."""
-
+    """
+    permissions = ( IsAuthenticated,)
+    
     def get(self, request):
         return [{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
 
 class GalleryListView(InstanceMixin, ReadModelMixin, ModelView):
     _suffix = 'Instance'
+    permissions = ( IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         instance = super(GalleryListView, self).get(request, *args, **kwargs)
         return instance
 
 class PhotoView(ReadModelMixin, ModelView):
     _suffix = 'Instance'
+    permissions = ( IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         photo = super(PhotoView, self).get(request, *args, **kwargs)
         self.resource.fields = self.resource.base_fields
@@ -43,6 +46,7 @@ class PhotoView(ReadModelMixin, ModelView):
         return photo
 
 class PhotoVoteView(ReadModelMixin, ModelView):
+    permissions = ( IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         photo = super(PhotoVoteView, self).get(request, *args, **kwargs)
         if photo.can_vote(self.user):
@@ -53,9 +57,12 @@ class PhotoVoteView(ReadModelMixin, ModelView):
         return HttpResponseRedirect(photo.url)
         
 class PhotoUploadView(CreateModelMixin, ModelView):
+
+    permissions = ( IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         target_url = reverse('photo-upload-user', kwargs={'pk':kwargs['pk'],'user_id':self.user.id})
         upload_url, upload_data = prepare_upload(request, target_url)
+
         return {'upload_url':upload_url, 'curl_example':'curl %s -X POST -F image=@image01.jpg'%(upload_url,)}
         
     def post(self, request, *args, **kwargs):
@@ -80,6 +87,7 @@ class PhotoUploadView(CreateModelMixin, ModelView):
 
 
 class PhotoDeleteView(DeleteModelMixin, ModelView, View):
+    permissions = ( IsAuthenticated,)
     def delete(self, request, *args, **kwargs):
         model = self.resource.model
         try:
