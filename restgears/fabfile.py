@@ -62,6 +62,7 @@ def clean_gae():
     local('rm -rf autoload')
     local('rm -rf dbindexer')
     local('rm -rf testapp')
-    local('rm -rf piston')
+    #local('rm -rf piston')
     local('rm -rf filetransfers')
+    local('rm -rf djangorestframework')
     local('rm -rf PIL')
