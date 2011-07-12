@@ -14,6 +14,7 @@ urlpatterns = patterns('',
                        (r'^$', Overview.as_view()),
                        (r'^news/', include('news.urls')),
                        (r'^gallery/', include('gallery.urls')),
+                       (r'^account/', include('account.urls')),
 
                        # Uncomment the admin/doc line below to enable admin documentation:
                        (r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from gallery.views import GalleryOverviewView,  GalleryListView, PhotoVoteView,PhotoView, download_handler, PhotoDeleteView, PhotoUploadView
+from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView, download_handler, PhotoDeleteView, PhotoUploadView
 from gallery.models import Gallery, Photo
 from djangorestframework.mixins import ListModelMixin
 from djangorestframework.resources import ModelResource
@@ -40,7 +40,7 @@ urlpatterns = patterns ('',
     url(r'^index$', ListModelView.as_view(resource=GalleryIndexResource), name='gallery-index'),
     url(r'^(?P<pk>\w+)$', GalleryListView.as_view(resource=GalleryListResource), name='gallery-instance'),
     url(r'^upload-(?P<pk>\w+)$', PhotoUploadView.as_view(resource=PhotoResource), name='photo-upload'),
-    url(r'^postupload-(?P<pk>\w+)-(?P<user_id>\w+)$', PhotoUploadView.as_view(resource=PhotoResource), name='photo-upload-user'),
+    url(r'^postupload-(?P<pk>\w+)-(?P<user_id>\w+)$', PostPhotoUploadView.as_view(resource=PhotoResource), name='photo-upload-user'),
     url(r'^photo-(?P<pk>\w+)$', PhotoView.as_view(resource=PhotoResource), name='photo-instance'),
     url(r'^vote-(?P<pk>\w+)$', PhotoVoteView.as_view(resource=PhotoResource), name='photo-vote'),
     url(r'^delete-(?P<pk>\w+)$', PhotoDeleteView.as_view(resource=PhotoResource), name='photo-delete'),

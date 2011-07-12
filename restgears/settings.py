@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     'djangorestframework',
 
     'base',
-    #'accounts',
+    'account',
     #'stats',
     'news',
     'gallery',

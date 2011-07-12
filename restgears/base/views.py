@@ -24,9 +24,10 @@ class Overview(View):
     Please feel free to browse, create, edit and delete the resources in these examples."""
 
     def get(self, request):
-        return [{'name': 'News Overview', 'url': reverse('news-overview')},{
-            'name': 'Gallery Overview', 'url': reverse('gallery-overview')
-            },]
+        return [{'name': 'News Overview', 'url': reverse('news-overview')},
+                {'name': 'Gallery Overview', 'url': reverse('gallery-overview')},
+                {'name': 'Account Overview', 'url': reverse('account-overview')},
+                ]
 
 #def image_download_handler(request, pk):
 #    image = get_object_or_404(Image, pk=pk)
