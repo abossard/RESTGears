@@ -1,17 +1,14 @@
 from django.conf.urls.defaults import *
 from django import forms
-from django.forms import ModelForm
 from account.views import AccountOverviewView, RetrieveCredentialsView
 from account.models import DeviceAuthToken
 
 from djangorestframework.resources import ModelResource
 
-class DeviceAuthTokenForm(ModelForm):
+class DeviceAuthTokenForm(forms.Form):
     email = forms.EmailField()
     nickname = forms.CharField()
-    class Meta:
-        model = DeviceAuthToken
-        fields = ('unique_id',)
+    unique_id = forms.CharField()
 
 class DeviceAuthTokenResource(ModelResource):
     model = DeviceAuthToken

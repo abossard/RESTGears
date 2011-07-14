@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'djangorestframework',
-
+    'dbindexer',
+    
     'base',
     'account',
     #'stats',
@@ -57,7 +58,8 @@ INSTALLED_APPS = (
 
     'djangotoolbox',
     'autoload',
-    'dbindexer',
+
+
     'filetransfers',
 
 #    'debug_toolbar',
@@ -65,11 +67,17 @@ INSTALLED_APPS = (
     'djangoappengine',
 )
 
+
+
 PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
 SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
 PUBLIC_DOWNLOAD_URL_BACKEND = 'filetransfers.backends.default.public_download_url'
 
+AUTH_PROFILE_MODULE = 'account.UserProfile'
 
+AUTHENTICATION_BACKENDS = (
+    'account.backends.DeviceAuthTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',)
 MIDDLEWARE_CLASSES = (
     # This loads the index definitions, so it has to come first
     'autoload.middleware.AutoloadMiddleware',

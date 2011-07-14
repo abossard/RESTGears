@@ -2,7 +2,7 @@
 import logging
 from djangorestframework.permissions import IsAuthenticated
 from djangorestframework.views import View, ModelView
-from djangorestframework.mixins import InstanceMixin, ReadModelMixin, DeleteModelMixin, UpdateModelMixin, CreateModelMixin, AuthMixin
+from djangorestframework.mixins import InstanceMixin, ReadModelMixin, DeleteModelMixin, ListModelMixin, UpdateModelMixin, CreateModelMixin, AuthMixin
 from djangorestframework.resources import ModelResource
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -23,7 +23,9 @@ class GalleryOverviewView(View):
     permissions = ( IsAuthenticated,)
     
     def get(self, request):
-        return [{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
+        return [{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},
+                {'name': 'Current User Uploads', 'url': reverse('photos-current-user')},
+                ]
 
 class GalleryListView(InstanceMixin, ReadModelMixin, ModelView):
     _suffix = 'Instance'
@@ -32,17 +34,42 @@ class GalleryListView(InstanceMixin, ReadModelMixin, ModelView):
         instance = super(GalleryListView, self).get(request, *args, **kwargs)
         return instance
 
-class PhotoView(ReadModelMixin, ModelView):
+class PhotoView(ReadModelMixin, DeleteModelMixin, ModelView):
     _suffix = 'Instance'
     permissions = ( IsAuthenticated,)
+    
     def get(self, request, *args, **kwargs):
         photo = super(PhotoView, self).get(request, *args, **kwargs)
         self.resource.fields = self.resource.base_fields
         if photo.can_vote(self.user):
             self.resource.fields = self.resource.fields + self.resource.vote_field
-        if photo.user.id == self.user.id:
+        if photo.can_delete(self.user):
             self.resource.fields = self.resource.fields + self.resource.delete_field
         return photo
+
+    def delete(self, request, *args, **kwargs):
+        model = self.resource.model
+        try:
+            if args:
+                # If we have any none kwargs then assume the last represents the primrary key
+                instance = model.objects.get(pk=args[-1], **kwargs)
+            else:
+                # Otherwise assume the kwargs uniquely identify the model
+                instance = model.objects.get(**kwargs)
+        except model.DoesNotExist:
+            raise ErrorResponse(status.HTTP_404_NOT_FOUND, None, {})
+        if instance.can_delete(self.user):
+            instance.delete()
+        return
+
+class PhotoListView(ListModelMixin, ModelView):
+    _suffix = 'List'
+    permissions = ( IsAuthenticated,)
+    def get(self, request, *args, **kwargs):
+        kwargs['user'] = self.user
+        self.resource.fields = self.resource.base_fields
+        self.resource.fields = self.resource.fields + self.resource.delete_field + self.resource.gallery_field 
+        return super(PhotoListView, self).get(request, *args, **kwargs)
 
 class PhotoVoteView(ReadModelMixin, ModelView):
     permissions = ( IsAuthenticated,)
@@ -90,24 +117,24 @@ class PhotoUploadView(View):
         result = {'upload_url':upload_url, 'curl_example':'curl %s -X POST -F image=@image01.jpg'%(upload_url,), 'target_url': target_url}
         logger.debug("Result: %s"%(result,))
         return result
-        
-class PhotoDeleteView(DeleteModelMixin, ModelView, View):
-    permissions = ( IsAuthenticated,)
-    def delete(self, request, *args, **kwargs):
-        model = self.resource.model
-        try:
-            if args:
-                # If we have any none kwargs then assume the last represents the primrary key
-                instance = model.objects.get(pk=args[-1], **kwargs)
-            else:
-                # Otherwise assume the kwargs uniquely identify the model
-                instance = model.objects.get(**kwargs)
-        except model.DoesNotExist:
-            raise ErrorResponse(status.HTTP_404_NOT_FOUND, None, {})
-        if instance.user.id == self.user.id:
-            instance.delete()
-        return
-    #def get(self, request, *args, **kwargs):
+#        
+#class PhotoDeleteView(DeleteModelMixin, ModelView, View):
+#    permissions = ( IsAuthenticated,)
+#    def delete(self, request, *args, **kwargs):
+#        model = self.resource.model
+#        try:
+#            if args:
+#                # If we have any none kwargs then assume the last represents the primrary key
+#                instance = model.objects.get(pk=args[-1], **kwargs)
+#            else:
+#                # Otherwise assume the kwargs uniquely identify the model
+#                instance = model.objects.get(**kwargs)
+#        except model.DoesNotExist:
+#            raise ErrorResponse(status.HTTP_404_NOT_FOUND, None, {})
+#        if instance.user.id == self.user.id:
+#            instance.delete()
+#        return
+#    #def get(self, request, *args, **kwargs):
      #   photo = super(PhotoDeleteView, self).get(request, *args, **kwargs)
       #  if photo.user.id == self.user.id:
        #     photo.delete()

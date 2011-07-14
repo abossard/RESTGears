@@ -6,16 +6,16 @@ from base.models import BaseModel
 from news.views import download_handler
 
 class Entry(BaseModel):
-    teaser = models.TextField(max_length=500, help_text='Insert text only');
-    content = models.TextField(max_length=4000, help_text='Insert HTML here');
+    teaser = models.TextField(max_length=500, help_text='This text is displayed in the news overview list a well as in top of every news entry (Text only)');
+    content = models.TextField(max_length=4000, help_text='This text is the main content for the news entry (supports HTML).');
     class Meta:
         verbose_name_plural = 'News Entries';
 
   
 class Image(models.Model):
-    description = models.TextField(max_length=500, help_text='Insert text only', blank=True);
+    description = models.TextField(max_length=500, help_text='Will be displayed under the image', blank=True);
     newsentry = models.ForeignKey(Entry, related_name='images');
-    image = models.ImageField(upload_to='uploads/news');
+    image = models.ImageField(upload_to='uploads/news', help_text='Select an image that is already resized for the iphone');
 
     def get_absolute_url(self):
         return reverse(download_handler, kwargs={'pk':self.pk,}) 

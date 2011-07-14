@@ -37,9 +37,9 @@ def make_gae_ready():
     local('mv lib/python2.6/site-packages/djangorestframework .')
     local('rm -rf lib')
 
-    local('pip install --install-option="--prefix=$PWD" django-debug-toolbar')
-    local('mv lib/python2.6/site-packages/debug_toolbar .')
-    local('rm -rf lib')
+    #local('pip install --install-option="--prefix=$PWD" django-debug-toolbar')
+    #local('mv lib/python2.6/site-packages/debug_toolbar .')
+    #local('rm -rf lib')
 
     curl('https://bitbucket.org/aaronmadison/django-filetransfers/get/tip.zip')
     local('mv aaronmadison-django-filetransfers-*/filetransfers .')
