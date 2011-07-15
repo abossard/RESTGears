@@ -7,15 +7,6 @@ from account.models import User
 
 
 class Gallery(BaseModel):
-
-    def get_absolute_url(self):
-        return reverse('gallery-instance', kwargs={'pk':self.pk,})
-    url = property(get_absolute_url)
-    
-    def get_upload_url(self):
-        return reverse('photo-upload', kwargs={'pk':self.pk,})
-    upload_url = property(get_upload_url)
-
     class Meta:
         verbose_name_plural = 'Galleries';
 
@@ -39,25 +30,6 @@ class Photo(models.Model):
         return reverse(download_handler, kwargs={'pk':self.pk,}) 
     image_url = property(get_absolute_url)
 
-    def _url(self):
-        return reverse('photo-instance', kwargs={'pk':self.pk,}) 
-    url = property(_url)
-    
-    def get_photo_vote_url(self):
-        return reverse('photo-vote', kwargs={'pk':self.pk,})
-    
-    vote_url = property(get_photo_vote_url)
-
-    def get_photo_delete_url(self):
-        return reverse('photo-instance', kwargs={'pk':self.pk,})
-    
-    delete_url = property(get_photo_delete_url)
-
-    def get_gallery_url(self):
-        return reverse('gallery-instance', kwargs={'pk':self.gallery.id,})
-    
-    gallery_url = property(get_gallery_url)
-    
     def preview_image(self):
         return u'<img src="%s" alt="Uploaded on %s by %s" height="100"/>'%(self.image_url, self.uploaded_on, self.user)
     preview_image.allow_tags = True

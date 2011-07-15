@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/powerfood.css" />
+{% endblock %}
+
+{% block title %}{{ title }} | {% trans 'Powerfood App Admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Powerfood 2011 App</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

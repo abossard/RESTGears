@@ -8,24 +8,15 @@ from filetransfers.api import serve_file
 
 
 class Overview(View):
-    """Welcome to RESTGears. Made with [Django REST framework](http://django-rest-framework.org).
+    """This is the Powerfood App Administration System.
 
-    RESTGears is a generic approach in providing a backend, that runs on various platforms and supports some generic functionality.
+    Unauthorized use is strictly prohibited.
 
-    All the example APIs allow anonymous access, and can be navigated either through the browser or from the command line...
-
-        bash: curl -X GET http://somedomain.com/                           # (Use default renderer)
-        bash: curl -X GET http://somedomain.com/ -H 'Accept: text/plain'   # (Use plaintext documentation renderer)
-
-    The modules provided: 
-   
-    1. A news module
-
-    Please feel free to browse, create, edit and delete the resources in these examples."""
+    """
 
     def get(self, request):
         return [{'name': 'News Overview', 'url': reverse('news-overview')},
-                {'name': 'Gallery Overview', 'url': reverse('gallery-overview')},
+                {'name': 'Gallery Overview', 'url': reverse('gallery-index')},
                 {'name': 'Account Overview', 'url': reverse('account-overview')},
                 ]
 

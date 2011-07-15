@@ -32,6 +32,35 @@ indexes:
   - name: authenticated_on
     direction: desc
 
+- kind: auth_group
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: auth_user
+  properties:
+  - name: idxf_username_l_iexact
+  - name: username
+
+- kind: auth_user
+  properties:
+  - name: is_staff
+  - name: username
+
+- kind: gallery_gallery
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: user_id
+  - name: votes
+    direction: desc
+  - name: uploaded_on
+    direction: desc
+
 - kind: gallery_photo
   properties:
   - name: gallery_id
@@ -53,4 +82,14 @@ indexes:
   - name: votes
     direction: desc
   - name: uploaded_on
+    direction: desc
+
+- kind: news_entry
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: news_image
+  properties:
+  - name: __key__
     direction: desc

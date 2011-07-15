@@ -25,7 +25,7 @@ TIME_ZONE = 'Europe/Zurich'
 LANGUAGE_CODE = 'en-us'
 
 #from base.sites import SiteIDHook
-#SITE_ID = SiteIDHook()
+#SITE_ID = 1
 
 USE_I18N = True
 
@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
-#    'django.contrib.sites',
+    #'django.contrib.sites',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -51,12 +51,14 @@ INSTALLED_APPS = (
     'dbindexer',
     
     'base',
-    'account',
+
     #'stats',
     'news',
     'gallery',
 
     'djangotoolbox',
+    'permission_backend_nonrel',
+    'account',
     'autoload',
 
 
@@ -76,12 +78,14 @@ PUBLIC_DOWNLOAD_URL_BACKEND = 'filetransfers.backends.default.public_download_ur
 AUTH_PROFILE_MODULE = 'account.UserProfile'
 
 AUTHENTICATION_BACKENDS = (
+    'permission_backend_nonrel.backends.NonrelPermissionBackend',
     'account.backends.DeviceAuthTokenBackend',
-    'django.contrib.auth.backends.ModelBackend',)
+    #'django.contrib.auth.backends.ModelBackend',
+    )
 MIDDLEWARE_CLASSES = (
     # This loads the index definitions, so it has to come first
     'autoload.middleware.AutoloadMiddleware',
-
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -117,3 +121,8 @@ TEMPLATE_DIRS = (
 
 ROOT_URLCONF = 'urls'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}

@@ -34,17 +34,12 @@ class GalleryListView(InstanceMixin, ReadModelMixin, ModelView):
         instance = super(GalleryListView, self).get(request, *args, **kwargs)
         return instance
 
-class PhotoView(ReadModelMixin, DeleteModelMixin, ModelView):
+class PhotoView(ListModelMixin, DeleteModelMixin, ModelView):
     _suffix = 'Instance'
     permissions = ( IsAuthenticated,)
     
     def get(self, request, *args, **kwargs):
         photo = super(PhotoView, self).get(request, *args, **kwargs)
-        self.resource.fields = self.resource.base_fields
-        if photo.can_vote(self.user):
-            self.resource.fields = self.resource.fields + self.resource.vote_field
-        if photo.can_delete(self.user):
-            self.resource.fields = self.resource.fields + self.resource.delete_field
         return photo
 
     def delete(self, request, *args, **kwargs):
@@ -66,9 +61,9 @@ class PhotoListView(ListModelMixin, ModelView):
     _suffix = 'List'
     permissions = ( IsAuthenticated,)
     def get(self, request, *args, **kwargs):
-        kwargs['user'] = self.user
-        self.resource.fields = self.resource.base_fields
-        self.resource.fields = self.resource.fields + self.resource.delete_field + self.resource.gallery_field 
+        #kwargs['user'] = self.user
+        if 'user' in kwargs and kwargs['user'] == 'me':
+            kwargs['user'] = self.user
         return super(PhotoListView, self).get(request, *args, **kwargs)
 
 class PhotoVoteView(ReadModelMixin, ModelView):
@@ -80,7 +75,7 @@ class PhotoVoteView(ReadModelMixin, ModelView):
             vote.save()
             photo.votes+=1
             photo.save()
-        return HttpResponseRedirect(photo.url)
+        return photo
 
 class PostPhotoUploadView(CreateModelMixin, ModelView):
     permissions = ( IsAuthenticated,)

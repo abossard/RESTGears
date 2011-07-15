@@ -26,6 +26,10 @@ def make_gae_ready():
     local('mv wkornewald-django-dbindexer-*/dbindexer .')
     local('rm -rf wkornewald-django-dbindexer-*')
 
+    curl('http://bitbucket.org/fhahn/django-permission-backend-nonrel/get/tip.zip')
+    local('mv fhan-django-permission-backend-nonrel-*/permission_backend_nonrel .')
+    local('rm -rf fhan-django-permission-backend-nonrel-*')
+
     curl('http://bitbucket.org/wkornewald/django-testapp/get/tip.zip')
     local('mv wkornewald-django-testapp-* testapp')
 
@@ -65,4 +69,5 @@ def clean_gae():
     #local('rm -rf piston')
     local('rm -rf filetransfers')
     local('rm -rf djangorestframework')
+    local('rm -rf permission_backend_nonrel')
     local('rm -rf PIL')
