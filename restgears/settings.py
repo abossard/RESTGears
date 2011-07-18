@@ -14,6 +14,8 @@ AUTOLOAD_SITECONF = 'indexes'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+ENABLE_PROFILER = True
+
 ADMINS = (
      #('Your name', 'your_email@example.com'),
 )
@@ -84,11 +86,15 @@ AUTHENTICATION_BACKENDS = (
     )
 MIDDLEWARE_CLASSES = (
     # This loads the index definitions, so it has to come first
+    'django.middleware.cache.UpdateCacheMiddleware',   
     'autoload.middleware.AutoloadMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+
    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
@@ -121,8 +127,15 @@ TEMPLATE_DIRS = (
 
 ROOT_URLCONF = 'urls'
 
+
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '',
+        'TIMEOUT': 0,
     }
 }
+USE_ETAGS = True
+#CACHE_MIDDLEWARE_ALIAS = 'middleware-cache'
+CACHE_MIDDLEWARE_SECONDS = 30
+#CACHE_MIDDLEWARE_KEY_PREFIX = 'powerfood2011'

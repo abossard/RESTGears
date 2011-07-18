@@ -8,6 +8,9 @@ from base.resources import AuthModelResource
 from djangorestframework.views import View, ListModelView, InstanceModelView
 from django.forms import ModelForm
 from base.utils import reverse
+from django.views.decorators.cache import cache_page, never_cache
+
+
 
 class GalleryResource(AuthModelResource):
     model = Gallery
@@ -29,14 +32,14 @@ class PhotoResource(AuthModelResource):
     model = Photo
     form = PhotoUploadForm
     include = ()
-    fields = ('id','uploaded_on',('user',(('get_profile',('nickname',),),),), 'image_url', 'votes','delete_url', 'vote_url', 'gallery_url', 'can_vote', 'can_delete', 'url', 'lastvote_on')
+    fields = ('id','uploaded_on','nickname','user_id', 'image_url', 'votes','delete_url', 'vote_url', 'gallery_url', 'can_vote', 'can_delete', 'url', 'lastvote_on')
 
     def can_delete(self, instance):
         return instance.can_delete(self.current_user)
 
     def can_vote(self, instance):
         return instance.can_vote(self.current_user)
-
+    
     def delete_url(self, instance):
         return reverse('photo-instance', kwargs={'pk':instance.pk,})
 
@@ -52,20 +55,20 @@ class PhotoResource(AuthModelResource):
 urlpatterns = patterns ('',
     #url(r'^$', GalleryOverviewView.as_view(), name ='gallery-overview'),
     url(r'^$', ListModelView.as_view(resource=GalleryResource), name='gallery-index'),
-    url(r'^uploads$', PhotoListView.as_view(resource=PhotoResource), name='photos-current-user'),
-    url(r'^(?P<gallery>\w+)/photos$', PhotoListView.as_view(resource=PhotoResource), name='photo-list'),
-    url(r'^(?P<gallery>\w+)/photos/(?P<user>\w+)$', PhotoListView.as_view(resource=PhotoResource), name='photo-list'),
+    #url(r'^uploads$', PhotoListView.as_view(resource=PhotoResource), name='photos-current-user'),
+    url(r'^(?P<gallery>\w+)/photos$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
+    url(r'^(?P<gallery>\w+)/photos/(?P<user>\w+)$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
     url(r'^(?P<pk>\w+)$', GalleryListView.as_view(resource=GalleryResource), name='gallery-instance'),
 
     #upload urls
-    url(r'^(?P<pk>\w+)/upload$', PhotoUploadView.as_view(), name='photo-upload'),
-    url(r'^(?P<pk>\w+)/(?P<user_id>\w+)/postupload$', PostPhotoUploadView.as_view(resource=PhotoResource), name='photo-upload-user'),
+    url(r'^(?P<pk>\w+)/upload$', never_cache(PhotoUploadView.as_view()), name='photo-upload'),
+    url(r'^(?P<pk>\w+)/(?P<user_id>\w+)/postupload$', never_cache(PostPhotoUploadView.as_view(resource=PhotoResource)), name='photo-upload-user'),
 
     #photo
-    url(r'^photo/(?P<pk>\w+)$', PhotoView.as_view(resource=PhotoResource), name='photo-instance'),
+    url(r'^photo/(?P<pk>\w+)$', never_cache(PhotoView.as_view(resource=PhotoResource)), name='photo-instance'),
 
     #actions
-    url(r'^vote/(?P<pk>\w+)$', PhotoVoteView.as_view(resource=PhotoResource), name='photo-vote'),
+    url(r'^vote/(?P<pk>\w+)$', never_cache(PhotoVoteView.as_view(resource=PhotoResource)), name='photo-vote'),
     #url(r'^delete-(?P<pk>\w+)$', PhotoDeleteView.as_view(resource=PhotoResource), name='photo-delete'),
 
     #serving

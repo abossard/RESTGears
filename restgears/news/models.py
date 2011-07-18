@@ -10,15 +10,16 @@ class Entry(BaseModel):
     content = models.TextField(max_length=4000, help_text='This text is the main content for the news entry (supports HTML).');
     class Meta:
         verbose_name_plural = 'News Entries';
-
+        ordering = ['-publish_on','-created_on']
   
 class Image(models.Model):
     description = models.TextField(max_length=500, help_text='Will be displayed under the image', blank=True);
     newsentry = models.ForeignKey(Entry, related_name='images');
     image = models.ImageField(upload_to='uploads/news', help_text='Select an image that is already resized for the iphone');
-
+    orderindex = models.IntegerField(default=100, help_text='Image will be ordererd according to its Order Index')
+    
     def get_absolute_url(self):
-        return reverse(download_handler, kwargs={'pk':self.pk,}) 
+        return reverse('news-image', kwargs={'pk':self.pk,}) 
     url = property(get_absolute_url)
 
     def preview_image(self):
@@ -28,3 +29,4 @@ class Image(models.Model):
 
     class Meta:
         verbose_name_plural = 'News Images';
+        ordering = ['orderindex',]

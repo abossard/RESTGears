@@ -7,11 +7,13 @@ from djangorestframework.resources import ModelResource
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from django.views.decorators.cache import never_cache, cache_control 
 from filetransfers.api import serve_file, prepare_upload
 from djangorestframework import status
 from djangorestframework.response import Response, ErrorResponse
 from gallery.models import Photo, Vote
 from google.appengine.ext import blobstore
+from django.core.cache import cache
 import urllib
 
 class GalleryOverviewView(View):
@@ -142,4 +144,4 @@ class PhotoUploadView(View):
 def download_handler(request, pk):
     from gallery.models import Photo
     photo = get_object_or_404(Photo, pk=pk)
-    return serve_file(request, photo.image, content_type='image/png')
+    return serve_file(request, photo.image, content_type='image/jpg')

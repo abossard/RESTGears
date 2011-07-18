@@ -29,6 +29,10 @@ handlers:
   static_dir: media
   expiration: '0'
 
+- url: /favicon\.ico
+  static_files: media/favicon.ico
+  upload: media/favicon\.ico
+
 - url: /.*
   script: djangoappengine/main/main.py
   secure: always

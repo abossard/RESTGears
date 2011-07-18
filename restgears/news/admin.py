@@ -29,7 +29,7 @@ class EntryAdmin(BaseModelAdmin):
 admin.site.register(Entry, EntryAdmin)
 
 class ImageAdmin(FiletransferAdmin):
-    fields = ('newsentry','image', 'description',)
+    fields = ('newsentry','image', 'description','orderindex')
     list_display= ('preview_image','newsentry', 'description',)
     list_filter = ('newsentry',)
     formfield_overrides = {
