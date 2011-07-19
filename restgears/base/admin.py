@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from filetransfers.admin import FiletransferAdmin
-from fields import BlobFileInput, AdminImageWidget
+from fields import AdminImageWidget 
 
 #from base.models import Category, Taglist, Tag, Image, Imagelist
 

@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView, download_handler,  PhotoUploadView, PhotoListView
+from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView,  PhotoUploadView, PhotoListView
 from gallery.models import Gallery, Photo
 from djangorestframework.mixins import ListModelMixin
 #from djangorestframework.resources import ModelResource
@@ -9,7 +9,7 @@ from djangorestframework.views import View, ListModelView, InstanceModelView
 from django.forms import ModelForm
 from base.utils import reverse
 from django.views.decorators.cache import cache_page, never_cache
-
+from base.views import ImageServeView
 
 
 class GalleryResource(AuthModelResource):
@@ -32,7 +32,7 @@ class PhotoResource(AuthModelResource):
     model = Photo
     form = PhotoUploadForm
     include = ()
-    fields = ('id','uploaded_on','nickname','user_id', 'image_url', 'votes','delete_url', 'vote_url', 'gallery_url', 'can_vote', 'can_delete', 'url', 'lastvote_on')
+    fields = ('id','uploaded_on','nickname','user_id','image_url', 'thumb_image_url','votes','delete_url','vote_url','gallery_url','can_vote', 'can_delete', 'url', 'lastvote_on')
 
     def can_delete(self, instance):
         return instance.can_delete(self.current_user)
@@ -47,7 +47,7 @@ class PhotoResource(AuthModelResource):
         return reverse('photo-vote', kwargs={'pk':instance.pk,})
 
     def gallery_url(self, instance):
-        return reverse('gallery-instance', kwargs={'pk':instance.gallery.id,})
+        return reverse('gallery-instance', kwargs={'pk':instance.gallery_id,})
 
     def url(self, instance):
         return reverse('photo-instance', kwargs={'pk':instance.pk,}) 
@@ -72,5 +72,5 @@ urlpatterns = patterns ('',
     #url(r'^delete-(?P<pk>\w+)$', PhotoDeleteView.as_view(resource=PhotoResource), name='photo-delete'),
 
     #serving
-    url(r'^image/(?P<pk>\w+)$', download_handler, name='serve-photo'),
+    url(r'^image/(?P<pk>\w+)$', ImageServeView.as_view(container=Photo), name='serve-photo'),
 )

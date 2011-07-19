@@ -29,6 +29,10 @@ handlers:
   static_dir: media
   expiration: '0'
 
+- url: /mestat
+  script: mestat.py
+  login: admin
+
 - url: /favicon\.ico
   static_files: media/favicon.ico
   upload: media/favicon\.ico

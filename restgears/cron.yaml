@@ -2,3 +2,6 @@ cron:
 - description: keep alive
   url: /
   schedule: every 2 minutes
+- description: Memcache stats
+  url: /mestat?update=1
+  schedule: every 10 minutes

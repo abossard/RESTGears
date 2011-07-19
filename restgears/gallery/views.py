@@ -140,8 +140,3 @@ class PhotoUploadView(View):
          #   return False
         #[{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
 
-
-def download_handler(request, pk):
-    from gallery.models import Photo
-    photo = get_object_or_404(Photo, pk=pk)
-    return serve_file(request, photo.image, content_type='image/jpg')

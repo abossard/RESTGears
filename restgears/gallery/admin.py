@@ -10,7 +10,6 @@ class GalleryAdmin(BaseModelAdmin):
 
 admin.site.register(Gallery, GalleryAdmin)
 
-
 class PhotoAdmin(FiletransferAdmin):
     fields = ('gallery','image', 'user', 'votes')
     #search_fields = ['user',]

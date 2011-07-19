@@ -42,6 +42,8 @@ class BaseModel(models.Model):
         abstract = True
         ordering = ['-created_on']
 
+
+
 #class Category(models.Model):
 #    name = models.CharField(max_length=200, help_text='Choose a name that describes this category', db_index=True, unique=True)
 #    parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
@@ -65,17 +67,4 @@ class BaseModel(models.Model):
 #class Imagelist(models.Model):
 #    pass
 #
-#class Image(models.Model):
-#    description = models.TextField(max_length=500, help_text='Insert text only (500 chars)', blank=True);
-#    imagedata = models.ImageField(upload_to='uploads',);
-#    on_imagelist = models.ForeignKey(Imagelist, related_name='images', null=True)
-#    def get_absolute_url(self):
-#        from base.views import image_download_handler
-#        return reverse(image_download_handler, kwargs={'pk':self.pk,})
-#    url = property(get_absolute_url)
-#
-#    def preview_html(self):
-#        return u'<img src="%s" alt="%s" height="100"/>'%(self.url, self.description)
-#    
-#    #preview_html = property(_preview_html)
-#    preview_html.allow_tags = True
+

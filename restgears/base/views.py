@@ -1,3 +1,4 @@
+import logging
 # Create your views here.
 from django.db.models import ImageField
 from django.core.urlresolvers import reverse
@@ -31,8 +32,9 @@ class ImageServeView(DjangoView):
     container = None
     image_field = None
     
-    def get(self, request, pk=None):
+    def get(self, request, pk=None, max_width=None, max_height=None):
         # find the blobfield/imagefield
+        log = logging.getLogger(__name__)
         if not self.image_field:
             for field in self.container._meta.fields:       
                 if isinstance(field, ImageField):
@@ -41,7 +43,11 @@ class ImageServeView(DjangoView):
             if not self.image_field:
                 raise Exception('No ImageField found')        
         image = get_object_or_404(self.container, pk=pk)
-        
-        return serve_file(request, getattr(image, self.image_field),)
+        imageFile = getattr(image, self.image_field)
+        #if 'max' in request.GET:
+        #    log.info('MAX: %s'%(request.GET['max'],))
+        #    max_size = int(request.GET['max'])
+            
+        return serve_file(request, imageFile)
     
     

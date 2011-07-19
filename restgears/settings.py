@@ -14,7 +14,10 @@ AUTOLOAD_SITECONF = 'indexes'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ENABLE_PROFILER = True
+ENABLE_PROFILER = False
+
+EXTRA_PROFILE_OUTPUT = ()
+SORT_PROFILE_RESULTS_BY = ('time','cumulative','calls')
 
 ADMINS = (
      #('Your name', 'your_email@example.com'),
@@ -29,11 +32,11 @@ LANGUAGE_CODE = 'en-us'
 #from base.sites import SiteIDHook
 #SITE_ID = 1
 
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
-USE_L10N = True
+USE_L10N = False
 
 
 SECRET_KEY = '=r-$b*8hglm+858&9t043hlm6-&6-3d3vfc4((7yd0dbrakhvi'
@@ -66,7 +69,7 @@ INSTALLED_APPS = (
 
     'filetransfers',
 
-#    'debug_toolbar',
+    'debug_toolbar',
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
 )
@@ -93,10 +96,26 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 
    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+INTERNAL_IPS = ('127.0.0.1',)
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
+
+INTERCEPT_REDIRECTS = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -128,14 +147,20 @@ TEMPLATE_DIRS = (
 ROOT_URLCONF = 'urls'
 
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '',
-        'TIMEOUT': 0,
-    }
-}
-USE_ETAGS = True
+DBINDEXER_BACKENDS = (
+    'dbindexer.backends.BaseResolver',
+    'dbindexer.backends.InMemoryJOINResolver',
+)
+
+
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#        'LOCATION': '',
+#        'TIMEOUT': 0,
+#    }
+#}
+#USE_ETAGS = True
 #CACHE_MIDDLEWARE_ALIAS = 'middleware-cache'
 CACHE_MIDDLEWARE_SECONDS = 30
 #CACHE_MIDDLEWARE_KEY_PREFIX = 'powerfood2011'
