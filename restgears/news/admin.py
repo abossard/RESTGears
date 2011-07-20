@@ -6,14 +6,13 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from base.fields import AdminImageWidget
 from base.admin import BaseModelAdmin
-from base.widgets import AlohaEditorWidget
 
 class EntryForm(ModelForm):
     
     class Meta:
         model = Entry
         widgets = {
-            'content': Textarea(attrs={'cols': 80, 'rows': 20, 'class':'article wysiwyg',}),
+            'content': Textarea(attrs={'cols': 80, 'rows': 20, 'class':'wysiwyg',}),
         }
 
 class EntryAdmin(BaseModelAdmin):
@@ -35,21 +34,19 @@ class EntryAdmin(BaseModelAdmin):
 
         )
     class Media:
-        js = ('aloha/aloha.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Format/plugin.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Table/plugin.js',
-              'aloha/plugins/com.gentics.aloha.plugins.List/plugin.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Link/plugin.js',
-              #'aloha/plugins/com.gentics.aloha.plugins.HighlightEditables/plugin.js',
-              'aloha/plugins/com.gentics.aloha.plugins.TOC/plugin.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Link/delicious.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Link/LinkList.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Paste/plugin.js',
-              'aloha/plugins/com.gentics.aloha.plugins.Paste/wordpastehandler.js',
-              'aloha_settings.js',
-              'aloha_start.js',
+        js = ('js/jquery.js',
+              'jwysiwyg/jquery.wysiwyg.js',
+              'jwysiwyg/controls/wysiwyg.link.js',
+              'jwysiwyg/controls/wysiwyg.cssWrap.js',
+              'jwysiwyg/controls/wysiwyg.table.js',
+              'jwysiwyg/controls/wysiwyg.image.js',
+              'jwysiwyg/controls/wysiwyg.colorpicker.js',
+              'jwysiwyg_start.js',
           )
-        css = {'all': ('css/aloha.css',)}
+        css = {'all': (
+                       'jwysiwyg/jquery.wysiwyg.css',
+                       'css/wysiwyg.css',
+                       )}
            
     #formfield_overrides = {
     #    models.TextField: {'widget': AlohaEditorWidget},
