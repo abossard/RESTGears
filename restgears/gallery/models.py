@@ -73,6 +73,7 @@ def create_photo(sender, instance, created, **kwargs):
         blob_key = str(instance.image.file.blobstore_info.key()) 
         instance.image_url = images.get_serving_url(blob_key)
         instance.thumb_image_url = images.get_serving_url(blob_key,100)
+        instance.save()
 post_save.connect(create_photo, sender=Photo)
 
 class Vote(models.Model):

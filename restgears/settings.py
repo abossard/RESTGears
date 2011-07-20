@@ -17,8 +17,8 @@ TEMPLATE_DEBUG = DEBUG
 ENABLE_PROFILER = False
 
 EXTRA_PROFILE_OUTPUT = ()
-SORT_PROFILE_RESULTS_BY = ('time','cumulative','calls')
-
+SORT_PROFILE_RESULTS_BY = ('cumulative','calls','time')
+MAX_PROFILE_RESULTS = 25
 ADMINS = (
      #('Your name', 'your_email@example.com'),
 )
@@ -114,8 +114,10 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
 )
+DEBUG_TOOLBAR_CONFIG ={
+                       'INTERCEPT_REDIRECTS' : False
+                       }
 
-INTERCEPT_REDIRECTS = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -150,6 +152,7 @@ ROOT_URLCONF = 'urls'
 DBINDEXER_BACKENDS = (
     'dbindexer.backends.BaseResolver',
     'dbindexer.backends.InMemoryJOINResolver',
+      'dbindexer.backends.FKNullFix',
 )
 
 
