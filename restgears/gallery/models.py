@@ -71,7 +71,7 @@ pre_save.connect(update_photo, sender=Photo)
 def create_photo(sender, instance, created, **kwargs):
     if created:
         blob_key = str(instance.image.file.blobstore_info.key()) 
-        instance.image_url = images.get_serving_url(blob_key)
+        instance.image_url = images.get_serving_url(blob_key, 960)
         instance.thumb_image_url = images.get_serving_url(blob_key,100)
         instance.save()
 post_save.connect(create_photo, sender=Photo)

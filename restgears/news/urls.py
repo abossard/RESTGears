@@ -16,6 +16,8 @@ class EntryResource(ModelResource):
         'name',
         'teaser',
         'content',
+        'image_url',
+        'thumb_image_url',
         ('images',
          ('description', 'url','id','orderindex'),),
         'publish_on',

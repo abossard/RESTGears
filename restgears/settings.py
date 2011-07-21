@@ -90,13 +90,14 @@ AUTHENTICATION_BACKENDS = (
 MIDDLEWARE_CLASSES = (
     # This loads the index definitions, so it has to come first
     'django.middleware.cache.UpdateCacheMiddleware',   
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'autoload.middleware.AutoloadMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    
     'django.middleware.cache.FetchFromCacheMiddleware',
 
    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -113,6 +114,7 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.sql.SQLDebugPanel',
     'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
+    'debug_toolbar.panels.cache.CacheDebugPanel',
 )
 DEBUG_TOOLBAR_CONFIG ={
                        'INTERCEPT_REDIRECTS' : False

@@ -25,7 +25,7 @@ class RetrieveCredentialsView(ModelView):
         log.debug('Request=%s, all_kw_args=%s'%(request, all_kw_args, ))
         nickname = all_kw_args['nickname']
         del all_kw_args['nickname']
-        email = all_kw_args['email']
+        email = all_kw_args['email'].lower()
         del all_kw_args['email']
         all_kw_args['ip_address'] = request.META['REMOTE_ADDR']
         all_kw_args['user_agent'] = request.META['HTTP_USER_AGENT']

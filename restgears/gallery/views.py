@@ -111,7 +111,7 @@ class PhotoUploadView(View):
         upload_url, upload_data = prepare_upload(request, target_url)
         logger.debug("Upload URL: %s"%(upload_url,))
         #upload_url = blobstore.create_upload_url(target_url)
-        result = {'upload_url':upload_url, 'curl_example':'curl %s -X POST -F image=@image01.jpg'%(upload_url,), 'target_url': target_url}
+        result = {'upload_url':upload_url, 'target_url': target_url}
         logger.debug("Result: %s"%(result,))
         return result
 #        

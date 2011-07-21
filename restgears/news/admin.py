@@ -15,8 +15,13 @@ class EntryForm(ModelForm):
             'content': Textarea(attrs={'cols': 80, 'rows': 20, 'class':'wysiwyg',}),
         }
 
-class EntryAdmin(BaseModelAdmin):
+class EntryAdmin(FiletransferAdmin):
     form = EntryForm
+    list_display = ('name','preview_image', 'publish_on')
+    list_display_links = ('name',)
+    #list_editable = ('publish_on', )
+    list_filter = ('publish_on',)
+    search_fields = ['name',]
     fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -25,7 +30,7 @@ class EntryAdmin(BaseModelAdmin):
             }),
             ('Content', {
             'classes': ('wide',),
-            'fields': ('teaser','content',)
+            'fields': ('image','teaser','content',)
             }),
         ('Advanced', {
             'classes': ('collapse',),
@@ -33,6 +38,14 @@ class EntryAdmin(BaseModelAdmin):
             }),
 
         )
+    formfield_overrides = {
+        models.ImageField: {'widget': AdminImageWidget},
+    }    
+    prepopulated_fields = {"slug": ("name",)}
+    #date_hierarchy = 'publish_on'
+    exclude = ('deleted_on', )
+    readonly_fields = ('created_on', 'updated_on',)
+    
     class Media:
         js = ('js/jquery.js',
               'jwysiwyg/jquery.wysiwyg.js',
