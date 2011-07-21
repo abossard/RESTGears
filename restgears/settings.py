@@ -97,6 +97,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
+    'base.middleware.BlobRedirectFixMiddleware',
     
     'django.middleware.cache.FetchFromCacheMiddleware',
 

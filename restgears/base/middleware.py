@@ -1,18 +1,21 @@
-from django.conf import settings
-from django.contrib.sites.models import Site
-from restgears.base import sites
+import logging
+import quopri
+log = logging.getLogger(__name__)
 
-class SiteSettings(object):
-    """Middleware that gets various objects from the
-    request object and saves them in thread local storage."""
+class BlobRedirectFixMiddleware(object):
     def process_request(self, request):
-        if True:
-            default_site_id = request.GET.get('site_id', sites.DEFAULT_SITE_ID)
-        else:
-            default_site_id = sites.DEFAULT_SITE_ID
-            
-        try:
-            current_site_id = Site.objects.get(domain__iexact=request.META["HTTP_HOST"])
-        except:
-            current_site_id = Site.objects.get(id=default_site_id)
-        sites.set_current_site_id(current_site_id.id)
+        if request.method == 'POST' and 'HTTP_X_APPENGINE_BLOBUPLOAD' in request.META and request.META['HTTP_X_APPENGINE_BLOBUPLOAD'] == 'true':
+            request.POST = request.POST.copy()
+            log.info('POST before decoding: %s' % request.POST)
+            for key in request.POST:
+                if key.startswith('_') or key == u'csrfmiddlewaretoken':
+                    continue
+                value = request.POST[key]
+                if isinstance(value,(str, unicode)):
+                    request.POST[key] = unicode(quopri.decodestring(value), 'iso_8859-2')
+            log.info('POST after decoding: %s' % request.POST) 
+        return None
+
+    def process_response(self, request, response):
+        log.info('REPOSNE Content: %s' % response['Content-type'])
+        return response

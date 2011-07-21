@@ -17,7 +17,7 @@ class Entry(BaseModel):
     thumb_image_url = models.CharField(editable=False, max_length=255)
 
     def preview_image(self):
-        return u'<img src="%s" alt="%s" height="100"/>'%(self.thumb_image_url, self.name)
+        return u'<img src="%s" alt="%s"/>'%(self.thumb_image_url, self.name)
     
     preview_image.allow_tags = True
 
