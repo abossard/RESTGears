@@ -11,7 +11,7 @@ class GalleryAdmin(BaseModelAdmin):
 admin.site.register(Gallery, GalleryAdmin)
 
 class PhotoAdmin(FiletransferAdmin):
-    fields = ('gallery','image', 'user', 'votes')
+    fields = ('gallery','image', 'user', 'votes', 'views')
     #search_fields = ['user',]
     list_filter = ('gallery',)
     list_display= ('preview_image','gallery', 'user','uploaded_on')

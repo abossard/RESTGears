@@ -18,7 +18,9 @@ class Gallery(BaseModel):
 class Photo(models.Model):
     image = models.ImageField(upload_to='uploads/gallery', );
     gallery = models.ForeignKey(Gallery, related_name='photos')
+    rank = models.IntegerField(editable=False, default=0)
     votes = models.PositiveIntegerField(default=0);
+    views = models.PositiveIntegerField(default=0);
     user = models.ForeignKey(User, related_name='photos')
     nickname = models.CharField(editable=False, max_length=128)
     uploaded_on =  models.DateTimeField(auto_now_add=True)

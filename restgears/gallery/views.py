@@ -7,11 +7,12 @@ from djangorestframework.resources import ModelResource
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from django.db.models import F
 from django.views.decorators.cache import never_cache, cache_control 
 from filetransfers.api import serve_file, prepare_upload
 from djangorestframework import status
 from djangorestframework.response import Response, ErrorResponse
-from gallery.models import Photo, Vote
+from gallery.models import Photo, Vote, Gallery
 from google.appengine.ext import blobstore
 from django.core.cache import cache
 import urllib
@@ -75,8 +76,8 @@ class PhotoVoteView(ReadModelMixin, ModelView):
         if photo.can_vote(self.user):
             vote = Vote(photo=photo, user=self.user)
             vote.save()
-            photo.votes+=1
-            photo.save()
+            Photo.objects.filter(pk=photo.id).update(votes=F('votes')+1)
+            photo.votes+=1 # just, so that the updated object is delivered
         return photo
 
 class PostPhotoUploadView(CreateModelMixin, ModelView):
@@ -139,4 +140,17 @@ class PhotoUploadView(View):
         #else:
          #   return False
         #[{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
+
+
+class PhotoUpdateRanks(View):
+  def get(self, request, *args, **kwargs):
+    #for each gallery
+    gallery_ids = Gallery.objects.values_list('id',flat=True)
+    for gallery_id in gallery_ids:
+        photo_ids = Photo.objects.filter(gallery_id=gallery_id).values_list('id',flat=True).order_by('votes', '-uploaded_on')
+    #get the first 1000 photos in the right order
+    #set the rank on these
+    
+    return True
+
 

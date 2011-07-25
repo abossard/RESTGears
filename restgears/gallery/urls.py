@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView,  PhotoUploadView, PhotoListView
+from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView,  PhotoUploadView, PhotoListView, PhotoUpdateRanks
 from gallery.models import Gallery, Photo
 from djangorestframework.mixins import ListModelMixin
 #from djangorestframework.resources import ModelResource
@@ -32,7 +32,7 @@ class PhotoResource(AuthModelResource):
     model = Photo
     form = PhotoUploadForm
     include = ()
-    fields = ('id','uploaded_on','nickname','user_id','image_url', 'thumb_image_url','votes','delete_url','vote_url','gallery_url','can_vote', 'can_delete', 'url', 'lastvote_on')
+    fields = ('id','uploaded_on','views','nickname','user_id','image_url','rank', 'thumb_image_url','votes','delete_url','vote_url','gallery_url','can_vote', 'can_delete', 'url', 'lastvote_on')
 
     def can_delete(self, instance):
         return instance.can_delete(self.current_user)
@@ -45,6 +45,9 @@ class PhotoResource(AuthModelResource):
 
     def vote_url(self, instance):
         return reverse('photo-vote', kwargs={'pk':instance.pk,})
+    
+    def image_url(self, instance):
+        return reverse('serve-photo', kwargs={'pk':instance.pk,})
 
     def gallery_url(self, instance):
         return reverse('gallery-instance', kwargs={'pk':instance.gallery_id,})
@@ -64,6 +67,8 @@ urlpatterns = patterns ('',
     url(r'^(?P<pk>\w+)/upload$', never_cache(PhotoUploadView.as_view()), name='photo-upload'),
     url(r'^(?P<pk>\w+)/(?P<user_id>\w+)/postupload$', never_cache(PostPhotoUploadView.as_view(resource=PhotoResource)), name='photo-upload-user'),
 
+    url(r'update-ranks', never_cache(PhotoUpdateRanks.as_view()), name='photo-update-ranks'),
+
     #photo
     url(r'^photo/(?P<pk>\w+)$', never_cache(PhotoView.as_view(resource=PhotoResource)), name='photo-instance'),
 
@@ -72,5 +77,6 @@ urlpatterns = patterns ('',
     #url(r'^delete-(?P<pk>\w+)$', PhotoDeleteView.as_view(resource=PhotoResource), name='photo-delete'),
 
     #serving
-    url(r'^image/(?P<pk>\w+)$', ImageServeView.as_view(container=Photo), name='serve-photo'),
+    url(r'^image/(?P<pk>\w+)$', ImageServeView.as_view(container=Photo, image_field='image_url'), name='serve-photo'),
+    #url(r'^image/(?P<pk>\w+)$', ImageServeView.as_view(container=Photo), name='serve-photo'),
 )
