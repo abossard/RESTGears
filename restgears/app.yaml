@@ -33,6 +33,10 @@ handlers:
   script: mestat.py
   login: admin
 
+- url: /import_news
+  script: import_news.py
+  login: admin
+
 - url: /favicon\.ico
   static_files: media/favicon.ico
   upload: media/favicon\.ico

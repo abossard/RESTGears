@@ -8,7 +8,8 @@ import datetime
 from django.core.management.base import BaseCommand
 from django.utils.encoding import smart_str
 from django.template.defaultfilters import slugify
-
+import logging
+log = logging.getLogger(__name__)
 
 from news.models import Entry
 
@@ -31,7 +32,7 @@ class Command(BaseCommand):
     #values = {'s' : sys.argv[1] }
     #data = urllib.urlencode(values)
     def handle(self, *args, **options):
-        self.stdout.write('Loading News form "%s"...\n' % site_url)
+        log.info('Loading News form "%s"...\n' % site_url)
         soup = get_the_soup(site_url)
         result = soup.find('td',text=re.compile('Latest News'))
         newsdata = []
@@ -70,8 +71,8 @@ class Command(BaseCommand):
                 attrs.update(filter_attrs)
                 obj = Entry.objects.create(**attrs)
                 obj.save()
-                self.stdout.write('Successfully created News Entry "%s" (%s)\n' % (title, day_start))
+                log.info('Successfully created News Entry "%s" (%s)\n' % (title, str(day_start)))
             else:
-                self.stdout.write('Successfully updated News Entry "%s"\n' % (title, day_start))
+                log.info('Successfully updated News Entry "%s" (%s)\n' % (title, str(day_start)))
 
 

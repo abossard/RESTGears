@@ -97,6 +97,14 @@ indexes:
 
 - kind: news_entry
   properties:
+  - name: external_key
+  - name: publish_on
+    direction: desc
+  - name: created_on
+    direction: desc
+
+- kind: news_entry
+  properties:
   - name: publish_on
     direction: desc
   - name: created_on
