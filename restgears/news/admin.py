@@ -34,7 +34,7 @@ class EntryAdmin(FiletransferAdmin):
             }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ( 'publish_on','slug',( 'created_on', 'updated_on',),)
+            'fields': ( 'publish_on','slug',( 'created_on', 'updated_on',),'external_key',)
             }),
 
         )
@@ -44,7 +44,7 @@ class EntryAdmin(FiletransferAdmin):
     prepopulated_fields = {"slug": ("name",)}
     #date_hierarchy = 'publish_on'
     exclude = ('deleted_on', )
-    readonly_fields = ('created_on', 'updated_on',)
+    readonly_fields = ('created_on', 'updated_on','external_key')
     
     class Media:
         js = ('js/jquery.js',
