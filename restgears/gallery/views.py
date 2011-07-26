@@ -153,15 +153,3 @@ class PhotoUploadView(View):
         #[{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
 
 
-class PhotoUpdateRanks(View):
-  def get(self, request, *args, **kwargs):
-    #for each gallery
-    gallery_ids = Gallery.objects.values_list('id',flat=True)
-    for gallery_id in gallery_ids:
-        photo_ids = Photo.objects.filter(gallery_id=gallery_id).values_list('id',flat=True).order_by('votes', '-uploaded_on')
-    #get the first 1000 photos in the right order
-    #set the rank on these
-    
-    return True
-
-

@@ -91,8 +91,6 @@ urlpatterns = patterns ('',
     url(r'^(?P<pk>\w+)/upload$', never_cache(PhotoUploadView.as_view()), name='photo-upload'),
     url(r'^(?P<pk>\w+)/(?P<user_id>\w+)/postupload$', never_cache(PostPhotoUploadView.as_view(resource=PhotoResource)), name='photo-upload-user'),
 
-    url(r'update-ranks', never_cache(PhotoUpdateRanks.as_view()), name='photo-update-ranks'),
-
     #photo
     url(r'^photo/(?P<pk>\w+)$', never_cache(PhotoView.as_view(resource=PhotoResource)), name='photo-instance'),
 
