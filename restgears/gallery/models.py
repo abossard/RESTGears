@@ -62,7 +62,7 @@ class Photo(models.Model):
     preview_image.allow_tags = True
 
     class Meta:
-        ordering = ['-votes', '-uploaded_on']
+        pass#ordering = ['-views', '-uploaded_on']
 
 def update_photo(sender, instance, raw, **kwargs):
     if not raw:

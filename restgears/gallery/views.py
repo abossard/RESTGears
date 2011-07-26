@@ -63,8 +63,19 @@ class PhotoView(ListModelMixin, DeleteModelMixin, ModelView):
 class PhotoListView(ListModelMixin, ModelView):
     _suffix = 'List'
     permissions = ( IsAuthenticated,)
+    valid_sortkeys = ('votes', 'views')
+    sortkey_prefix = '-'
+    default_sortkey = ('-uploaded_on')
     def get(self, request, *args, **kwargs):
         #kwargs['user'] = self.user
+        self.queryset = self.resource.model.objects.all()
+        if 'ordering' in kwargs:
+            sortkey = kwargs['ordering']
+            del kwargs['ordering']
+            if sortkey in self.valid_sortkeys:
+                self.queryset = self.queryset.order_by(self.sortkey_prefix+sortkey, self.default_sortkey)
+        else:
+            self.queryset = self.queryset.order_by(self.default_sortkey)
         if 'user' in kwargs and kwargs['user'] == 'me':
             kwargs['user'] = self.user
         return super(PhotoListView, self).get(request, *args, **kwargs)
