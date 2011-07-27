@@ -37,6 +37,10 @@ handlers:
   script: import_news.py
   login: admin
 
+- url: /calculate_ranks
+  script: calculate_ranks.py
+  login: admin
+
 - url: /favicon\.ico
   static_files: media/favicon.ico
   upload: media/favicon\.ico

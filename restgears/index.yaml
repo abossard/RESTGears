@@ -60,6 +60,24 @@ indexes:
 - kind: gallery_photo
   properties:
   - name: gallery_id
+  - name: rank
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: uploaded_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: user_id
+  - name: rank
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: user_id
   - name: uploaded_on
     direction: desc
 
@@ -76,7 +94,29 @@ indexes:
   properties:
   - name: gallery_id
   - name: user_id
+  - name: views
+    direction: desc
   - name: votes
+    direction: desc
+  - name: uploaded_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: user_id
+  - name: votes
+    direction: desc
+  - name: uploaded_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: user_id
+  - name: votes
+    direction: desc
+  - name: views
     direction: desc
   - name: uploaded_on
     direction: desc
@@ -98,6 +138,24 @@ indexes:
 - kind: gallery_photo
   properties:
   - name: gallery_id
+  - name: views
+    direction: desc
+  - name: votes
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: views
+    direction: desc
+  - name: votes
+    direction: desc
+  - name: updated_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
   - name: votes
 
 - kind: gallery_photo
@@ -110,6 +168,42 @@ indexes:
   properties:
   - name: gallery_id
   - name: votes
+    direction: desc
+  - name: updated_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: votes
+    direction: desc
+  - name: uploaded_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: votes
+    direction: desc
+  - name: views
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: votes
+    direction: desc
+  - name: views
+    direction: desc
+  - name: updated_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: gallery_id
+  - name: votes
+    direction: desc
+  - name: views
     direction: desc
   - name: uploaded_on
     direction: desc
@@ -131,7 +225,34 @@ indexes:
 
 - kind: gallery_photo
   properties:
+  - name: views
+    direction: desc
   - name: votes
+    direction: desc
+  - name: updated_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: votes
+    direction: desc
+  - name: uploaded_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: votes
+    direction: desc
+  - name: views
+    direction: desc
+  - name: updated_on
+    direction: desc
+
+- kind: gallery_photo
+  properties:
+  - name: votes
+    direction: desc
+  - name: views
     direction: desc
   - name: uploaded_on
     direction: desc

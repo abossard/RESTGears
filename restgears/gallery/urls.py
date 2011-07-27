@@ -18,33 +18,21 @@ class GalleryResource(AuthModelResource):
               'created_on', 
               'upload_url',
               'photos_url',
-              'photos_by_views_url',
-              'photos_by_votes_url',
-              'photos_by_uploaded_url',
               'my_photos_url',
-              'my_photos_by_views_url',
-              'my_photos_by_votes_url',
-              'my_photos_by_uploaded_url',
+              'query_params',
               )
     
     def upload_url(self, instance):
         return reverse('photo-upload', kwargs={'pk':instance.pk,})
+    
     def photos_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'ordering':'votes'})
-    def photos_by_views_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'ordering':'views'})
-    def photos_by_votes_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'ordering':'votes'})
-    def photos_by_uploaded_url(self, instance):
         return reverse('photo-list', kwargs={'gallery':instance.pk,})
+    
     def my_photos_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'user':'me'})
-    def my_photos_by_views_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'user':'me', 'ordering':'views'})
-    def my_photos_by_votes_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'user':'me', 'ordering':'votes'})
-    def my_photos_by_uploaded_url(self, instance):
-        return reverse('photo-list', kwargs={'gallery':instance.pk,'user':'me'})        
+        return reverse('photo-list', kwargs={'gallery':instance.pk,'user':'me',})
+    
+    def query_params(self, instance):
+        return PhotoResource.query_params
 
 class PhotoUploadForm(ModelForm):
     class Meta:
@@ -55,6 +43,15 @@ class PhotoResource(AuthModelResource):
     model = Photo
     form = PhotoUploadForm
     include = ()
+    orderings = { 
+                    'votes': ('-votes','-views','-uploaded_on',),
+                       'views': ('-views', '-votes','-uploaded_on'),
+                       'rank': ('rank',),
+                       'uploaded_on': ('-uploaded_on', ),
+                       'lastvote_on': ('-lastvote_on', ),
+                       }
+    query_params = {'ordering': orderings}
+    
     fields = ('id','uploaded_on','views','nickname','user_id','image_url','rank', 'thumb_image_url','votes','delete_url','vote_url','gallery_url','can_vote', 'can_delete', 'url', 'lastvote_on')
     def can_delete(self, instance):
         return instance.can_delete(self.current_user)
@@ -82,8 +79,8 @@ urlpatterns = patterns ('',
     url(r'^$', ListModelView.as_view(resource=GalleryResource), name='gallery-index'),
     #url(r'^uploads$', PhotoListView.as_view(resource=PhotoResource), name='photos-current-user'),
     url(r'^(?P<gallery>\w+)/photos$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
-    url(r'^(?P<gallery>\w+)/photos-by-(?P<ordering>\w+)$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
-    url(r'^(?P<gallery>\w+)/photos-by-(?P<ordering>\w+)/(?P<user>\w+)$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
+    #url(r'^(?P<gallery>\w+)/photos(/)?\?ordering=(?P<ordering>\w+)$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
+    #url(r'^(?P<gallery>\w+)/photos/(?P<user>\w+)\?ordering=(?P<ordering>\w+)$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
     url(r'^(?P<gallery>\w+)/photos/(?P<user>\w+)$', never_cache(PhotoListView.as_view(resource=PhotoResource)), name='photo-list'),
     url(r'^(?P<pk>\w+)$', GalleryListView.as_view(resource=GalleryResource), name='gallery-instance'),
 

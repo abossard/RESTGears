@@ -4,6 +4,7 @@ from djangorestframework.permissions import IsAuthenticated
 from djangorestframework.views import View, ModelView
 from djangorestframework.mixins import InstanceMixin, ReadModelMixin, DeleteModelMixin, ListModelMixin, UpdateModelMixin, CreateModelMixin, AuthMixin
 from djangorestframework.resources import ModelResource
+from djangorestframework.utils import as_tuple
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -17,6 +18,8 @@ from google.appengine.ext import blobstore
 from django.core.cache import cache
 import urllib
 
+
+log = logging.getLogger(__name__)
 class GalleryOverviewView(View):
     """Welcome to the Gallery Module.
 
@@ -63,22 +66,25 @@ class PhotoView(ListModelMixin, DeleteModelMixin, ModelView):
 class PhotoListView(ListModelMixin, ModelView):
     _suffix = 'List'
     permissions = ( IsAuthenticated,)
-    valid_sortkeys = ('votes', 'views')
-    sortkey_prefix = '-'
-    default_sortkey = ('-uploaded_on')
+    
     def get(self, request, *args, **kwargs):
         #kwargs['user'] = self.user
-        self.queryset = self.resource.model.objects.all()
-        if 'ordering' in kwargs:
-            sortkey = kwargs['ordering']
-            del kwargs['ordering']
-            if sortkey in self.valid_sortkeys:
-                self.queryset = self.queryset.order_by(self.sortkey_prefix+sortkey, self.default_sortkey)
-        else:
-            self.queryset = self.queryset.order_by(self.default_sortkey)
+        
         if 'user' in kwargs and kwargs['user'] == 'me':
-            kwargs['user'] = self.user
-        return super(PhotoListView, self).get(request, *args, **kwargs)
+            kwargs['user'] = self.user        
+        
+        if 'ordering' in request.GET:
+            kwargs['ordering']= str(request.GET['ordering'])
+
+        if 'ordering' in kwargs:
+            sortkey = kwargs['ordering'] 
+            del kwargs['ordering']
+            if hasattr(self.resource, 'orderings') and sortkey in self.resource.orderings:
+                orderings = self.resource.orderings[sortkey]
+                return self.resource.model.objects.order_by(*orderings).filter(**kwargs)
+        else:
+            return self.resource.model.objects.filter(**kwargs)
+
 
 class PhotoVoteView(ReadModelMixin, ModelView):
     permissions = ( IsAuthenticated,)
@@ -101,8 +107,7 @@ class PostPhotoUploadView(CreateModelMixin, ModelView):
                        })
         del kwargs['pk']
         all_kw_args = dict(self.CONTENT.items() + kwargs.items())
-        logger = logging.getLogger(__name__)
-        logger.info("Returning from BlobStore, kwargs: %s, "%(all_kw_args))
+        log.info("Returning from BlobStore, kwargs: %s, "%(all_kw_args))
         super(PostPhotoUploadView, self).post(request, *args, **kwargs)
         return HttpResponseRedirect("http://google.com")
         #if 'pk' in kwargs:
@@ -116,15 +121,14 @@ class PostPhotoUploadView(CreateModelMixin, ModelView):
 class PhotoUploadView(View):
     permissions = ( IsAuthenticated,)
     def get(self, request, *args, **kwargs):
-        logger = logging.getLogger(__name__)
-        logger.debug("in PhotoUploadView.get: args=%s, kwargs=%s"%(args, kwargs))
+        log.debug("in PhotoUploadView.get: args=%s, kwargs=%s"%(args, kwargs))
         target_url = reverse('photo-upload-user', kwargs={'pk':kwargs['pk'],'user_id':self.user.id})
-        logger.debug("Target URL: %s"%(target_url,))
+        log.debug("Target URL: %s"%(target_url,))
         upload_url, upload_data = prepare_upload(request, target_url)
-        logger.debug("Upload URL: %s"%(upload_url,))
+        log.debug("Upload URL: %s"%(upload_url,))
         #upload_url = blobstore.create_upload_url(target_url)
         result = {'upload_url':upload_url, 'target_url': target_url}
-        logger.debug("Result: %s"%(result,))
+        log.debug("Result: %s"%(result,))
         return result
 #        
 #class PhotoDeleteView(DeleteModelMixin, ModelView, View):

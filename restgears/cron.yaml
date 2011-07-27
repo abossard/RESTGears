@@ -2,6 +2,7 @@ cron:
 - description: keep alive
   url: /
   schedule: every 2 minutes
+
 - description: Memcache stats
   url: /mestat?update=1
   schedule: every 10 minutes
@@ -9,3 +10,7 @@ cron:
 - description: Import Powerfood News
   url: /import_news
   schedule: every 30 minutes
+
+- description: Calculate the Ranks
+  url: /calculate_ranks
+  schedule: every 5 minutes

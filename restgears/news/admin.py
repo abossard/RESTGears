@@ -34,7 +34,7 @@ class EntryAdmin(FiletransferAdmin):
             }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ( 'publish_on','slug',( 'created_on', 'updated_on',),'external_key',)
+            'fields': ( 'image_url','thumb_image_url','publish_on','slug',( 'created_on', 'updated_on',),'external_key',)
             }),
 
         )

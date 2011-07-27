@@ -72,7 +72,7 @@ class Command(BaseCommand):
             if images:
                 image_url = absolutize_url(href, images[0]['src'])
                 attrs.update({
-                              'image_url': image_url,
+                              'image_url': '',
                               'thumb_image_url':image_url,
                               })
 
