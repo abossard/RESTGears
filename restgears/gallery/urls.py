@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView,  PhotoUploadView, PhotoListView, PhotoUpdateRanks
+from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView,  PhotoUploadView, PhotoListView
 from gallery.models import Gallery, Photo
 from djangorestframework.mixins import ListModelMixin
 #from djangorestframework.resources import ModelResource

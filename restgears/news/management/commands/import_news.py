@@ -6,7 +6,7 @@ import sys
 from BeautifulSoup import BeautifulSoup
 import datetime
 from django.core.management.base import BaseCommand
-from django.utils.encoding import smart_str
+from django.utils.encoding import smart_str, smart_unicode
 from django.template.defaultfilters import slugify
 import logging
 log = logging.getLogger(__name__)
@@ -26,6 +26,14 @@ def get_the_bytes(uri, headers=headers):
     response = urllib2.urlopen(request)
     return response.read()
 
+def absolutize_url(base, url):
+    if url.startswith('http'):
+        return url
+    if url.startswith('/'):
+        return '/'.join(base.split('/')[:3]) + url
+    return '/'.join(base.split('/')[:-1])+'/' + url 
+        
+
 class Command(BaseCommand):
     args = ''
     help = 'Import news Items from the Powerfood Website'
@@ -35,11 +43,10 @@ class Command(BaseCommand):
         log.info('Loading News form "%s"...\n' % site_url)
         soup = get_the_soup(site_url)
         result = soup.find('td',text=re.compile('Latest News'))
-        newsdata = []
         for newslink in result.parent.parent.parent.parent.findAll('a'):
-            external_key = href = newslink['href'].strip().split('?')[0]
+            external_key = href = absolutize_url(site_url, newslink['href'].strip().split('?')[0])
             
-            date, title = smart_str(newslink.string).split(' - ') 
+            date, title = smart_unicode(newslink.string).split(' - ') 
             day, month, year = date.split('.')
             day_start = datetime.datetime(int(year), int(month), int(day))
             #day_end = day_start + day_length
@@ -53,17 +60,22 @@ class Command(BaseCommand):
             for node in content_td.contents:
                 content += str(node)
             content = smart_str(content)
-            #images = content_soup.findAll('img',)
-            #image_data = None
-            #if images:
-            #    image_url = images[0]['src']
-            #    image_data = get_the_bytes(image_url)
-                
+              
                 
             attrs = {'name': title, 
                      'content': content, 
                      'publish_on':day_start,
                      'slug': slugify(title)[:50],}
+            
+            #find images
+            images = content_td.findAll('img',)
+            if images:
+                image_url = absolutize_url(href, images[0]['src'])
+                attrs.update({
+                              'image_url': image_url,
+                              'thumb_image_url':image_url,
+                              })
+
             filter_attrs = { 'external_key':external_key,}
             rows = Entry.objects.filter(**filter_attrs).update(**attrs)
             
@@ -71,8 +83,8 @@ class Command(BaseCommand):
                 attrs.update(filter_attrs)
                 obj = Entry.objects.create(**attrs)
                 obj.save()
-                log.info('Successfully created News Entry "%s" (%s)\n' % (title, str(day_start)))
+                log.info('Successfully created News Entry "%s" (%s)' % (title, day_start))
             else:
-                log.info('Successfully updated News Entry "%s" (%s)\n' % (title, str(day_start)))
+                log.info('Successfully updated News Entry "%s" (%s)' % (title, day_start))
 
 

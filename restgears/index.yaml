@@ -54,6 +54,11 @@ indexes:
 
 - kind: gallery_photo
   properties:
+  - name: __key__
+    direction: desc
+
+- kind: gallery_photo
+  properties:
   - name: gallery_id
   - name: uploaded_on
     direction: desc

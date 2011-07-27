@@ -17,8 +17,8 @@ class Entry(BaseModel):
     thumb_image_url = models.CharField(editable=False, max_length=255)
     external_key = models.CharField(editable=False, null=True, blank=True, max_length=255, db_index=True)
     def preview_image(self):
-        if self.image:
-            return u'<img src="%s" alt="%s"/>'%(self.thumb_image_url, self.name)
+        if self.thumb_image_url:
+            return u'<img src="%s" alt="%s" height="100"/>'%(self.thumb_image_url, self.name)
         else:
             return 'No Image'
     
