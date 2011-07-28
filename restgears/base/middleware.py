@@ -17,5 +17,5 @@ class BlobRedirectFixMiddleware(object):
         return None
 
     def process_response(self, request, response):
-        log.info('REPOSNE Content: %s' % response['Content-type'])
+        #log.info('Response Content: %s' % response['Content-type'])
         return response

@@ -13,14 +13,15 @@ class Command(BaseCommand):
     #values = {'s' : sys.argv[1] }
     #data = urllib.urlencode(values)
     def handle(self, *args, **options):
-        log.info('Starting to calculate the ranks...\n')
+        log.info('Starting to calculate the ranks...')
         gallery_ids = Gallery.objects.values_list('id',flat=True)
         for gallery_id in gallery_ids:
             rank = 1
             for photo_id in Photo.objects.filter(gallery=gallery_id).values_list('id',flat=True).order_by('-votes','-views','-uploaded_on',):
                 Photo.objects.filter(pk=photo_id).update(rank=rank)
-                log.info('Set ID %s to Rank %s'%(photo_id, rank))
+                log.debug('Set ID %s to Rank %s'%(photo_id, rank))
                 rank+=1
+        log.info('Finished calculating.')
                 
             
 

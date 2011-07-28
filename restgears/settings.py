@@ -11,7 +11,7 @@ DATABASES['native'] = DATABASES['default']
 DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
 AUTOLOAD_SITECONF = 'indexes'
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ENABLE_PROFILER = False
@@ -155,7 +155,7 @@ ROOT_URLCONF = 'urls'
 DBINDEXER_BACKENDS = (
     'dbindexer.backends.BaseResolver',
     'dbindexer.backends.InMemoryJOINResolver',
-      'dbindexer.backends.FKNullFix',
+    'dbindexer.backends.FKNullFix',
 )
 
 

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from djangorestframework.views import View
 from djangorestframework.compat import View as DjangoView
 from django.http import HttpResponseRedirect
+from django.conf import settings
     # Create your views here.
 from django.shortcuts import get_object_or_404
 from filetransfers.api import serve_file
@@ -20,10 +21,13 @@ class Overview(View):
     """
 
     def get(self, request):
-        return [{'name': 'News Overview', 'url': reverse('news-overview')},
+        if settings.DEBUG:
+            return [{'name': 'News Overview', 'url': reverse('news-overview')},
                 {'name': 'Gallery Overview', 'url': reverse('gallery-index')},
                 {'name': 'Account Overview', 'url': reverse('account-overview')},
                 ]
+        else:
+            return
 
 #def image_download_handler(request, pk):
 #    image = get_object_or_404(Image, pk=pk)
