@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from filetransfers.api import serve_file
 #from base.models import Image
 
+log = logging.getLogger(__name__)
 
 class Overview(View):
     """This is the Powerfood App Administration System.
@@ -49,7 +50,7 @@ class ImageServeView(DjangoView):
             
         if hasattr(instance, 'views'):
             self.container.objects.filter(pk=pk).update(views=F('views')+1)
-            
+            log.debug('image view: %s Referer: %s'%(instance, request.META.get('HTTP_REFERER', '')))
         field_data = getattr(instance, self.image_field)
         if self.image_field_type == ImageField:
             return serve_file(request, field_data)
