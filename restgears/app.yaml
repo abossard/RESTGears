@@ -25,6 +25,25 @@ handlers:
   static_dir: media/css
   expiration: '0'
 
+- url: /media/js
+  static_dir: media/js
+  expiration: '0'
+
+- url: /media/jwysiwyg
+  static_dir: media/jwysiwyg
+  expiration: '0'
+
+- url: /media/jwysiwyg/controls
+  static_dir: media/jwysiwyg/controls
+  expiration: '0'
+
+- url: /media/jwysiwyg/plugins
+  static_dir: media/jwysiwyg/plugins
+  expiration: '0'
+
+- url: /media/jwysiwyg/plugins/filemanager
+  static_dir: media/jwysiwyg/plugins/filemanager
+  expiration: '0'
 - url: /media
   static_dir: media
   expiration: '0'

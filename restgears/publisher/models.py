@@ -54,3 +54,10 @@ class NewsImage(models.Model):
         verbose_name_plural = 'News Images';
         ordering = ['orderindex',]
 
+class Article(BaseModel):
+    content = models.TextField(max_length=4000, help_text='This text is the main content for the news entry (supports HTML).');
+    
+    class Meta:
+        verbose_name_plural = 'Articles';
+        ordering = ['-publish_on','-created_on']
+    
