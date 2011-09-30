@@ -11,7 +11,7 @@ from django.template.defaultfilters import slugify
 import logging
 log = logging.getLogger(__name__)
 
-from news.models import Entry
+from publisher.models import NewsEntry
 
 user_agent = 'Mozilla/5 (Solaris 10) Gecko'
 headers = { 'User-Agent' : user_agent }
@@ -51,7 +51,7 @@ class Command(BaseCommand):
             day_start = datetime.datetime(int(year), int(month), int(day))
             #day_end = day_start + day_length
             #print day_start, day_end, title, href
-            #newsentry = Entry.objects.filter(publish_on__range=(day_start, day_end))
+            #newsentry = NewsEntry.objects.filter(publish_on__range=(day_start, day_end))
             
             #load content
             content_soup = get_the_soup(href)
@@ -77,14 +77,14 @@ class Command(BaseCommand):
                               })
 
             filter_attrs = { 'external_key':external_key,}
-            rows = Entry.objects.filter(**filter_attrs).update(**attrs)
+            rows = NewsEntry.objects.filter(**filter_attrs).update(**attrs)
             
             if not rows:
                 attrs.update(filter_attrs)
-                obj = Entry.objects.create(**attrs)
+                obj = NewsEntry.objects.create(**attrs)
                 obj.save()
-                log.info('Successfully created News Entry "%s" (%s)' % (title, day_start))
+                log.info('Successfully created News NewsEntry "%s" (%s)' % (title, day_start))
             else:
-                log.info('Successfully updated News Entry "%s" (%s)' % (title, day_start))
+                log.info('Successfully updated News NewsEntry "%s" (%s)' % (title, day_start))
 
 

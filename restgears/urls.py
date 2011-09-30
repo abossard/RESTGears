@@ -12,7 +12,7 @@ urlpatterns = patterns('',
                        # Examples:
                        # url(r'^$', 'restgears.views.home', name='home'),
                        (r'^$', Overview.as_view()),
-                       (r'^news/', include('news.urls')),
+                       (r'^news/', include('publisher.urls')),
                        (r'^gallery/', include('gallery.urls')),
                        (r'^account/', include('account.urls')),
 

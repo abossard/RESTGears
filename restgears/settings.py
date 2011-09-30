@@ -11,7 +11,7 @@ DATABASES['native'] = DATABASES['default']
 DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
 AUTOLOAD_SITECONF = 'indexes'
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ENABLE_PROFILER = False
@@ -58,7 +58,7 @@ INSTALLED_APPS = (
     'base',
 
     #'stats',
-    'news',
+    'publisher',
     'gallery',
 
     'djangotoolbox',

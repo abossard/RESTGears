@@ -1,3 +1,3 @@
 from dbindexer.api import register_index
-from news.models import Entry
+from publisher.models import NewsEntry
 

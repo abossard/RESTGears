@@ -17,6 +17,6 @@ class News(View):
 
 
 def download_handler(request, pk):
-    from news.models import Image
-    image = get_object_or_404(Image, pk=pk)
+    from publisher.models import NewsIsmage
+    image = get_object_or_404(NewsImage, pk=pk)
     return serve_file(request, image.image)

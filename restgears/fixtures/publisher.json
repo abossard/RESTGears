@@ -1,0 +1,182 @@
+[
+  {
+    "pk": 56001, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/17082011-Ironville-Artikel-wieder-aufgestockt.html", 
+      "name": "Ironville Artikel wieder aufgestockt!", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-08-17 00:00:00", 
+      "deleted_on": null, 
+      "content": "\t\tFrisch eingetroffen, <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">neue und bestehende Shirts / Pants</span> von Ironville. <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">Cool Prints, cool Lifestyle</span>!<br />&nbsp;<a href=\"http://www.powerfood.ch/index.php?manufacturers_id=31\"><img alt=\"Ironville\" src=\"http://www.powerfood.ch/images/Ironville_350.jpg\" /></a>\n", 
+      "created_on": "2011-08-17 14:37:59", 
+      "image_url": "", 
+      "updated_on": "2011-08-17 14:38:00", 
+      "slug": "ironville-artikel-wieder-aufgestockt", 
+      "thumb_image_url": "http://www.powerfood.ch/images/Ironville_350.jpg"
+    }
+  }, 
+  {
+    "pk": 50004, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/24082011-Ultimate-Nutrition-wieder-komplett-an-Lager-ua-mit-neuem-Produkt-Waxy-Maize.html", 
+      "name": "Tiefere Preise bei Body Attack", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-08-14 00:00:00", 
+      "deleted_on": null, 
+      "content": " <span style=\"font-weight: bold; color: rgb(0, 0, 255);\">Ultimate Nutrition</span> kann wieder gross bestellt werden, frisch reingekommen das <a href=\"http://www.powerfood.ch/products/de/Kohlenhydrate/Ultimate-Nutrition-Waxy-Maize-5443g-Eimer.html\"><span style=\"font-weight: bold; color: rgb(0, 0, 255);\">hochmolekulare Kohlenhydrat-Produkt Waxy Maize</span></a><br /><br /><a href=\"index.php?manufacturers_id=29\"><img alt=\"Ultimate Nutrition\" src=\"/templates/powerfood/Bilder/hersteller/Ultimate_Nutrition_100.gif\" /></a>\n", 
+      "created_on": "2011-08-24 09:05:38", 
+      "image_url": "", 
+      "updated_on": "2011-08-24 09:05:39", 
+      "slug": "tiefere-preise-bei-body-attack", 
+      "thumb_image_url": "http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/Ultimate_Nutrition_100.gif"
+    }
+  }, 
+  {
+    "pk": 55001, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/14082011-Tiefere-Preise-bei-Body-Attack.html", 
+      "name": "Tiefere Preise bei Body Attack", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-08-14 00:00:00", 
+      "deleted_on": null, 
+      "content": " <img src=\"http://www.powerfood.ch/images/Preisssturz.jpg\" alt=\"PowerFood_Preissturz\" /><br /><br />Erneut werden die Preise bei <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">PowerFood</span> neu kalkuliert auf Grund d<span style=\"color: rgb(0, 0, 255); font-weight: bold;\">er tieferen Devisenkurse und den erh&ouml;hten Rohstoffpreisen.</span> Nachdem die Preise bei <span style=\"font-weight: bold; color: rgb(0, 0, 255);\">Ultimate Nutrition, Olimp, EFX, Optimum Nutrition, Met-RX, MySupps</span> gesunken sind, Ab <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">sofort tiefere Preise</span> von bis zu 18% bei <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">Body Attack!</span><br /><br /><span style=\"font-weight: bold; color: rgb(0, 0, 255);\"> </span> <a href=\"http://www.powerfood.ch/index.php?manufacturers_id=32\"><img alt=\"Body_Attack\" src=\"http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/Body_Attack.gif\" /></a>\n", 
+      "created_on": "2011-08-14 12:20:25", 
+      "image_url": "", 
+      "updated_on": "2011-08-14 12:20:25", 
+      "slug": "tiefere-preise-bei-body-attack", 
+      "thumb_image_url": "http://www.powerfood.ch/images/Preisssturz.jpg"
+    }
+  }, 
+  {
+    "pk": 49002, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/09082011-Neue-Preise-bei-Optimum-Nutrition.html", 
+      "name": "Neue Preise bei Optimum Nutrition", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-08-09 00:00:00", 
+      "deleted_on": null, 
+      "content": " <img src=\"http://www.powerfood.ch/images/Preisssturz.jpg\" alt=\"PowerFood_Preissturz\" /><br /><br />Erneut werden die Preise bei <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">PowerFood</span> neu kalkuliert auf Grund d<span style=\"color: rgb(0, 0, 255); font-weight: bold;\">er tieferen Devisenkurse und den erh&ouml;hten Rohstoffpreisen.</span> Ab <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">sofort tiefere Preise</span> von bis zu 15% bei <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">Optimum Nutrition!</span><br /><br /><span style=\"font-weight: bold; color: rgb(0, 0, 255);\"> </span> <a href=\"http://www.powerfood.ch/index.php?manufacturers_id=25\"><img alt=\"Optimum_Nutrition\" src=\"http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/ON_brand.gif\" /></a>\n", 
+      "created_on": "2011-08-09 09:15:04", 
+      "image_url": "", 
+      "updated_on": "2011-08-09 09:15:04", 
+      "slug": "neue-preise-bei-optimum-nutrition", 
+      "thumb_image_url": "http://www.powerfood.ch/images/Preisssturz.jpg"
+    }
+  }, 
+  {
+    "pk": 49001, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/04082011-ISS-Oh-Yeah-Riegel-frisch-an-Lager.html", 
+      "name": "ISS Oh Yeah Riegel frisch an Lager", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-08-04 00:00:00", 
+      "deleted_on": null, 
+      "content": " <p>Die beliebten <font color=\"#0000ff\"><strong>ISS Oh Yeah Riegel</strong></font> k&ouml;nnen wieder bestellt werden.</p>\n<a href=\"http://www.powerfood.ch/products/de/Riegel/ISS-Oh-Yeah-12x85g-Riegel.html\"><img alt=\"OhYeah\" src=\"http://www.powerfood.ch/images/produkte_pic/ISS_Oh_Yeah.jpg\" /></a>\n", 
+      "created_on": "2011-08-04 14:45:37", 
+      "image_url": "", 
+      "updated_on": "2011-08-04 14:45:37", 
+      "slug": "iss-oh-yeah-riegel-frisch-an-lager", 
+      "thumb_image_url": "http://www.powerfood.ch/images/produkte_pic/ISS_Oh_Yeah.jpg"
+    }
+  }, 
+  {
+    "pk": 46122, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/03082011-Olimp-wieder-an-Lager.html", 
+      "name": "Olimp wieder an Lager", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-08-03 00:00:00", 
+      "deleted_on": null, 
+      "content": "\t\tOlimp ist frisch reingekommen, insbesondere ist der <span style=\"color: rgb(0, 0, 255);\">Olimp Gain Bolic</span> sowie der <span style=\"color: rgb(0, 0, 255);\">Olimp Profi Whey Mass</span> wieder in allen Geschmacksrichtungen an Lager. Ebenfalls das sensationelle hochreine und extrem feine<span style=\"color: rgb(0, 0, 255);\"> Olimp Creapure Monohydrate 500g k</span>ann wieder GROSS eingekauft werden. Viel Spass.<br /><br />&nbsp;<a href=\"http://www.powerfood.ch/index.php?manufacturers_id=15\"><img alt=\"Olimp\" src=\"http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/olimp_sportnutrition.gif\" /></a>\n", 
+      "created_on": "2011-08-03 06:07:02", 
+      "image_url": "", 
+      "updated_on": "2011-08-03 06:07:03", 
+      "slug": "olimp-wieder-an-lager", 
+      "thumb_image_url": "http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/olimp_sportnutrition.gif"
+    }
+  }, 
+  {
+    "pk": 43116, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/19072011-Neue-Geschmaecker-beim-Ironmaxx-100-Wheyprotein-Wasserbasis.html", 
+      "name": "Neue Geschm\u00e4cker beim Ironmaxx 100% Wheyprotein (Wasserbasis)", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-07-19 00:00:00", 
+      "deleted_on": null, 
+      "content": "\n<span style=\"color: rgb(0, 0, 255); font-weight: bold;\">D</span>as beliebte <span style=\"font-weight: bold; color: rgb(0, 0, 255);\">Ironmaxx 100% Whey (Wasserbasis)</span> sind wieder <span style=\"font-weight: bold; color: rgb(0, 0, 255);\">neue Geschm&auml;cker</span> frisch reingekommen. Viel Spass beim zugreifen!<br /><br />&nbsp; <a href=\"http://www.powerfood.ch/products/de/Protein/Ironmaxx-100-Whey-Protein-2350g-Dose.html\"><img alt=\"\" src=\"http://www.powerfood.ch/images/wasserbasis.jpg\" /></a>\n", 
+      "created_on": "2011-07-26 12:17:26", 
+      "image_url": "", 
+      "updated_on": "2011-07-28 15:00:29", 
+      "slug": "neue-geschmacker-beim-ironmaxx-100-wheyprotein-was", 
+      "thumb_image_url": "http://www.powerfood.ch/images/wasserbasis.jpg"
+    }
+  }, 
+  {
+    "pk": 45116, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/17072011-Grosse-Preissenkung.html", 
+      "name": "Grosse Preissenkung!", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-07-17 00:00:00", 
+      "deleted_on": null, 
+      "content": "\n<img src=\"http://www.powerfood.ch/images/Preisssturz.jpg\" alt=\"PowerFood_Preissturz\" /><br /><br />Erneut werden die Preise bei <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">PowerFood</span> neu kalkuliert auf Grund d<span style=\"color: rgb(0, 0, 255); font-weight: bold;\">er tieferen Devisenkurse und den erh&ouml;hten Rohstoffpreisen.</span> Ab <span style=\"color: rgb(0, 0, 255); font-weight: bold;\">sofort tiefere Preise</span> u.a. bei <br /><br /><a href=\"http://www.powerfood.ch/index.php?manufacturers_id=15\"><img alt=\"Olimp\" src=\"http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/olimp_sportnutrition.gif\" /></a><br /><br /><a href=\"http://www.powerfood.ch/index.php?manufacturers_id=29\"><img alt=\"Ultimate Nutrition\" src=\"http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/Ultimate_Nutrition_100.gif\" /></a><br /><br /> <a href=\"http://www.powerfood.ch/index.php?manufacturers_id=34\"><img alt=\"EFX\" src=\"http://www.powerfood.ch/templates/powerfood/Bilder/hersteller/EFX_Logo.jpg\" /></a><br /><br /><span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-ProStar-100-Whey-Platinum-Series-908g-Dose.html\">Ultimate Nutrition ProStar Whey 900g</a><br /> <a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-ProStar-100-Whey-Platinum-Series-2400g.html\">Ultimate Nutrition ProStar Whey 2.4kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-ProStar-100-Whey-Platinum-Series-4600g.html\">Ultimate Nutrition ProStar Whey 4.6kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-ProStar-100-Whey-Platinum-Twinpack-4800g.html\">Ultimate Nutrition ProStar Whey 4.8kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-Isocool-2300g-Dose.html\">Ultimate Nutrition IsoCool 2.3kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-Isocool-Twinpack-4600g-Dose.html\">Ultimate Nutrition IsoCool 4.6kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Aminosaeuren/Ultimate-Nutrition-Glutapure-400g-Dose.html\">Ultimate Nutrition Glutapure 400g</a></span><br /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Aminosaeuren/Ultimate-Nutrition-Glutapure-1000g-Dose.html\">Ultimate Nutrition Glutapure 1kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Weight-Gainer/Ultimate-Nutrition-Muscle-Juice-4750g-Eimer.html\">Ultimate Nutrition Muscle Juice 4.75kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Weight-Gainer/Ultimate-Nutrition-Massive-Whey-Gainer-4250g-Dose.html\">Ultimate Nutrition Massive Whey Gainer 4.25kg</a></span><br /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-ISO-Sensation-93-1590g-Dose.html\">Ultimate Nutrition IsoSensation 1.59kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Protein/Ultimate-Nutrition-ISO-Sensation-93-Twinpack-3180g-Dose.html\">Ultimate Nutrition IsoSensation 3.2kg</a><br /> <a href=\"http://www.powerfood.ch/products/de/Vitamine-Mineralien/Ultimate-Nutrition-ZMA-90-Caps.html\">Ultimate Nutrition ZMA</a><br /> <a href=\"http://www.powerfood.ch/products/de/Aminosaeuren/Ultimate-Nutrition-BCAA-12000-Powder-400g.html\">Ultimate Nutrition BCAA Powder</a><br /> <a href=\"http://www.powerfood.ch/products/de/Aminosaeuren/Ultimate-Nutrition-Arginin-Ornithin-Lysin-100-Caps.html\">Ultimate Nutrition Arginin Ornithin Lysin</a></span><br /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Aminosaeuren/Olimp-Pump-Express-8482-1400g-Dose.html\">Olimp Pump Express</a></span><br /> <a href=\"http://www.powerfood.ch/products/de/Aminosaeuren/Olimp-Pump-Express-8482-Twinpack-2800g-Dose.html\"><strong>Olimp Pump Express Twinpack</strong></a><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/Olimp-Creatin-Mega-Caps-400-Caps--1250mg.html\">Olimp Creatin Mega Caps</a></span><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /><span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/Olimp-Creatine-Monohydrate-Mega-Caps-120-Caps--1250mg.html\">Olimp Creatin Mega Caps Blister</a></span><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/Olimp-CREAPURE-Powder-500g.html\">Olimp Creapure</a></span><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/Olimp-Creatin-Monohydrate-550g-Dose.html\">Olimp Creatine Powder</a></span><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/EFX-Kre-Alkalyn-PRO-120-Super-Caps.html\">EFX KreAlkalyn PRO</a></span><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/EFX-Kre-Alkalyn-240--750mg.html\">EFX KreAlkalyn 240</a></span><br style=\"font-weight: bold; color: rgb(0, 0, 255);\" /> <span style=\"font-weight: bold; color: rgb(0, 0, 255);\"><a href=\"http://www.powerfood.ch/products/de/Kreatin/Olimp-Kre-Alkalyn-Mega-Caps-120-Caps-150g.html\">Olimp KreAlkalyn Mega Caps</a><br /> <a href=\"http://www.powerfood.ch/products/de/Kreatin/Olimp-Kre-Alkalyn-Mega-Pack-240-Caps-300g.html\">Olimp KreAlkalyn Mega Caps Twinpack</a><br /> </span>\n", 
+      "created_on": "2011-07-26 12:17:27", 
+      "image_url": "", 
+      "updated_on": "2011-07-26 12:17:27", 
+      "slug": "grosse-preissenkung", 
+      "thumb_image_url": "http://www.powerfood.ch/images/Preisssturz.jpg"
+    }
+  }, 
+  {
+    "pk": 47005, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/14072011-Eroeffnung-PowerGym-Thun.html", 
+      "name": "Er\u00f6ffnung PowerGym Thun", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-07-14 00:00:00", 
+      "deleted_on": null, 
+      "content": " <p>Der neuste Streich von PowerFood! Das <b style=\"color: rgb(0, 0, 255);\">zweite PowerGym er&ouml;ffnet am 04. September in Thun seine Pforten.</b> Getreu den Maximen <b style=\"color: rgb(0, 0, 255);\">der langen Trainingszeiten (Rund um die Uhr)</b> und einem top Ger&auml;tepark, der keine W&uuml;nsche offen l&auml;sst, kann man nun schon in einem weiteren <b style=\"color: rgb(0, 0, 255);\">PowerGym diese Vorteile</b> nutzen. Das Angebot wird in Thun noch mit Group Fitness, Sauna und Solarium abgerundet. Ein Besuch lohnt sich...<b style=\"color: rgb(0, 0, 255);\">Join the club...be a member of the PowerGym</b>!</p>\n<p><a mce_href=\"http://www.powergym.ch\" href=\"http://www.powergym.ch\"><img alt=\"PowerGym_Thun\" mce_src=\"http://www.powergym.ch/images/powergym_erfoeffnung_thun_550.jpg\" src=\"http://www.powergym.ch/images/powergym_erfoeffnung_thun_550.jpg\" /></a><br mce_bogus=\"1\" /></p>\n", 
+      "created_on": "2011-07-26 12:17:28", 
+      "image_url": "", 
+      "updated_on": "2011-07-26 12:17:28", 
+      "slug": "eroffnung-powergym-thun", 
+      "thumb_image_url": "http://www.powergym.ch/images/powergym_erfoeffnung_thun_550.jpg"
+    }
+  }, 
+  {
+    "pk": 44148, 
+    "model": "publisher.newsentry", 
+    "fields": {
+      "external_key": "http://www.powerfood.ch/content/de/12042011-Immer-wieder-neue-Texte-auf-Swiss-BB.html", 
+      "name": "Immer wieder neue Texte auf Swiss-BB", 
+      "image": "", 
+      "teaser": "", 
+      "publish_on": "2011-04-12 00:00:00", 
+      "deleted_on": null, 
+      "content": " <span style=\"font-weight: bold; color: rgb(0, 0, 255);\">Ein Besuch lohnt sich immer, die Plattform SWISS-BB u.a mit den Top-Texten von Andrea Z&uuml;rcher</span>.<br /><br />&nbsp;<a target=\"_new\" href=\"http://www.swiss-bb.ch\"><img src=\"http://www.powerfood.ch/images/swiss-bb-powerfood.jpg\" alt=\"swiss-bb\" /></a>\n", 
+      "created_on": "2011-07-26 12:17:31", 
+      "image_url": "", 
+      "updated_on": "2011-07-26 12:17:31", 
+      "slug": "immer-wieder-neue-texte-auf-swiss-bb", 
+      "thumb_image_url": "http://www.powerfood.ch/images/swiss-bb-powerfood.jpg"
+    }
+  }
+]

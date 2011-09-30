@@ -7,10 +7,6 @@ cron:
   url: /mestat?update=1
   schedule: every 10 minutes
 
-- description: Import Powerfood News
-  url: /import_news
-  schedule: every 30 minutes
-
 - description: Calculate the Ranks
   url: /calculate_ranks
   schedule: every 5 minutes

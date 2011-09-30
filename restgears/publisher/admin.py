@@ -1,5 +1,5 @@
 from django.contrib import admin
-from news.models import Entry, Image
+from publisher.models import NewsEntry, NewsImage
 from filetransfers.admin import FiletransferAdmin
 from django.forms import FileInput, ClearableFileInput, ModelForm, Textarea
 from django.db import models
@@ -10,7 +10,7 @@ from base.admin import BaseModelAdmin
 class EntryForm(ModelForm):
     
     class Meta:
-        model = Entry
+        model = NewsEntry
         widgets = {
             'content': Textarea(attrs={'cols': 80, 'rows': 20, 'class':'wysiwyg',}),
         }
@@ -65,9 +65,9 @@ class EntryAdmin(FiletransferAdmin):
     #    models.TextField: {'widget': AlohaEditorWidget},
     #}
 
-admin.site.register(Entry, EntryAdmin)
+admin.site.register(NewsEntry, EntryAdmin)
 
-class ImageAdmin(FiletransferAdmin):
+class NewsImageAdmin(FiletransferAdmin):
     fields = ('newsentry','image', 'description','orderindex')
     list_display= ('preview_image','newsentry', 'description',)
     list_filter = ('newsentry',)
@@ -75,4 +75,4 @@ class ImageAdmin(FiletransferAdmin):
         models.ImageField: {'widget': AdminImageWidget},
     }    
 
-admin.site.register(Image, ImageAdmin)
+admin.site.register(NewsImage, NewsImageAdmin)

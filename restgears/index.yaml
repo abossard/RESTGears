@@ -260,3 +260,15 @@ indexes:
   properties:
   - name: newsentry_id
   - name: orderindex
+
+- kind: publisher_newsentry
+  properties:
+  - name: publish_on
+    direction: desc
+  - name: created_on
+    direction: desc
+
+- kind: publisher_newsimage
+  properties:
+  - name: newsentry_id
+  - name: orderindex
