@@ -28,10 +28,10 @@ class EntryResource(ModelResource):
 class ArticleResource(ModelResource):
     model = Article
     fields = (
-        'slug',
+        'id',
         'name',
+        'content',
         'publish_on',
-        'url',
         )
     def url(self, instance):
         return reverse('article-instance', kwargs={'pk':instance.pk,}) 
@@ -40,6 +40,7 @@ class ArticleInstanceResource(ModelResource):
     model = Article
     fields = (
         'slug',
+        'id',
         'name',
         'publish_on',
         'content',
