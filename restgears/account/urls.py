@@ -6,8 +6,8 @@ from account.models import DeviceAuthToken
 from djangorestframework.resources import ModelResource
 
 class DeviceAuthTokenForm(forms.Form):
-    email = forms.EmailField()
-    nickname = forms.CharField()
+    email = forms.EmailField(required=False)
+    nickname = forms.CharField(required=False)
     unique_id = forms.CharField()
 
 class DeviceAuthTokenResource(ModelResource):
