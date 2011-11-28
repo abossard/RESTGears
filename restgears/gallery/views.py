@@ -157,3 +157,11 @@ class PhotoUploadView(View):
         #[{'name': 'Gallery Categories Index', 'url': reverse('gallery-index')},]
 
 
+class PhotoFlagView(ReadModelMixin, ModelView):
+    def get(self, request, *args, **kwargs):
+        photo = super(PhotoFlagView, self).get(request, *args, **kwargs)
+        photo.flagged = True
+        photo.save()
+        return photo
+
+

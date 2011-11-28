@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
-from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView,PhotoView,  PhotoUploadView, PhotoListView
+from gallery.views import GalleryOverviewView,  GalleryListView, PostPhotoUploadView, PhotoVoteView, PhotoFlagView,PhotoView,  PhotoUploadView, PhotoListView
 from gallery.models import Gallery, Photo
 from djangorestframework.mixins import ListModelMixin
 #from djangorestframework.resources import ModelResource
@@ -52,7 +52,7 @@ class PhotoResource(AuthModelResource):
                        }
     query_params = {'ordering': orderings}
     
-    fields = ('id','uploaded_on','views','nickname','user_id','image_url','rank', 'thumb_image_url','votes','delete_url','vote_url','gallery_url','can_vote', 'can_delete', 'url', 'lastvote_on')
+    fields = ('id','uploaded_on','views','nickname','user_id','image_url','rank', 'thumb_image_url','votes','delete_url','vote_url','flag_url','flagged','gallery_url','can_vote', 'can_delete', 'url', 'lastvote_on')
     def can_delete(self, instance):
         return instance.can_delete(self.current_user)
 
@@ -65,6 +65,9 @@ class PhotoResource(AuthModelResource):
     def vote_url(self, instance):
         return reverse('photo-vote', kwargs={'pk':instance.pk,})
     
+    def flag_url(self, instance):
+        return reverse('photo-flag', kwargs={'pk':instance.pk,})
+        
     def image_url(self, instance):
         return reverse('serve-photo', kwargs={'pk':instance.pk,})
 
@@ -93,6 +96,7 @@ urlpatterns = patterns ('',
 
     #actions
     url(r'^vote/(?P<pk>\w+)$', never_cache(PhotoVoteView.as_view(resource=PhotoResource)), name='photo-vote'),
+    url(r'^flag/(?P<pk>\w+)$', never_cache(PhotoFlagView.as_view(resource=PhotoResource)), name='photo-flag'),
     #url(r'^delete-(?P<pk>\w+)$', PhotoDeleteView.as_view(resource=PhotoResource), name='photo-delete'),
 
     #serving

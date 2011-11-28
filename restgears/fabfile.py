@@ -26,23 +26,23 @@ def make_gae_ready():
     local('mv wkornewald-django-dbindexer-*/dbindexer .')
     local('rm -rf wkornewald-django-dbindexer-*')
 
-    curl('http://bitbucket.org/fhahn/django-permission-backend-nonrel/get/tip.zip')
-    local('mv fhan-django-permission-backend-nonrel-*/permission_backend_nonrel .')
-    local('rm -rf fhan-django-permission-backend-nonrel-*')
+    #curl('https://github.com/fhahn/django-permission-backend-nonrel/zipball/master')
+    #local('mv fhan-django-permission-backend-nonrel-*/permission_backend_nonrel .')
+    #local('rm -rf fhan-django-permission-backend-nonrel-*')
 
     curl('http://bitbucket.org/wkornewald/django-testapp/get/tip.zip')
     local('mv wkornewald-django-testapp-* testapp')
 
     #local('pip install --install-option="--prefix=$PWD" django-piston')
-    #local('mv lib/python2.6/site-packages/piston .')
+    #local('mv lib/python2.7/site-packages/piston .')
     #local('rm -rf lib')
 
     local('pip install --install-option="--prefix=$PWD" djangorestframework')
-    local('mv lib/python2.6/site-packages/djangorestframework .')
+    local('mv lib/python2.7/site-packages/djangorestframework .')
     local('rm -rf lib')
 
     #local('pip install --install-option="--prefix=$PWD" django-debug-toolbar')
-    #local('mv lib/python2.6/site-packages/debug_toolbar .')
+    #local('mv lib/python2.7/site-packages/debug_toolbar .')
     #local('rm -rf lib')
 
     curl('https://bitbucket.org/aaronmadison/django-filetransfers/get/tip.zip')
@@ -69,5 +69,5 @@ def clean_gae():
     #local('rm -rf piston')
     local('rm -rf filetransfers')
     local('rm -rf djangorestframework')
-    local('rm -rf permission_backend_nonrel')
+    #local('rm -rf permission_backend_nonrel')
     local('rm -rf PIL')

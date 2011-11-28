@@ -23,6 +23,7 @@ class Photo(models.Model):
     views = models.PositiveIntegerField(default=0);
     user = models.ForeignKey(User, related_name='photos')
     nickname = models.CharField(editable=False, max_length=128)
+    flagged = models.BooleanField(default=False)
     uploaded_on =  models.DateTimeField(auto_now_add=True)
     lastvote_on =  models.DateTimeField(auto_now=True)
 
